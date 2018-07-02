@@ -1,0 +1,40 @@
+>>>> enable_launcher.bat
+
+>>>> md c:\wim
+
+>>>> dism /mount-wim /wimfile:c:\bootmedia\sources\install.wim /index:1 /MountDir:c:\wim
+
+Deployment Image Servicing and Management tool
+Version: 10.0.17134.1
+
+
+Error: 3
+
+The system cannot find the path specified.
+
+The DISM log file can be found at C:\WINDOWS\Logs\DISM\dism.log
+
+>>>> dism /image:c:\wim /enable-feature /all /featureName:Client-EmbeddedShellLauncher
+
+Deployment Image Servicing and Management tool
+Version: 10.0.17134.1
+
+
+Error: 2
+
+Unable to access the image.
+Make sure that the image path and the Windows directory for the image exist and you have Read permissions on the folder.
+
+The DISM log file can be found at C:\WINDOWS\Logs\DISM\dism.log
+
+>>>> dism /unmount-wim /MountDir:c:\wim /Commit
+
+Deployment Image Servicing and Management tool
+Version: 10.0.17134.1
+
+
+Error: 50
+
+The request is not supported.
+
+The DISM log file can be found at C:\WINDOWS\Logs\DISM\dism.log

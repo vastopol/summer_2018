@@ -1,0 +1,138 @@
+Setting up a kiosk for Windows 8 && 10 
+--------------------------------------
+
+Options:
+0. Group Policy && Batch Files
+1. Assigned Access
+
+Notes:
+* Assigned Access can only use App type: UWP 
+* You cannot configure both Shell Launcher and Assigned Access on the same system.
+
+Application Types:
+* Win32 - Classic Windows
+* UWP   - Universal Windows Platform (Windows Store apps)
+
+=======================================
+
+0. Group Policy && Batch Files
+------------------------------
+
+Configured similarly to the help document for windows 8
+
+Microsoft Management Console:
+* add a Group Policy Object
+* set up restrictions for the user account
+* run kioskbootstrap.bat at user logon
+    windows settings -> scripts -> logon -> add the batch files
+
+=======================================
+
+1.1 Assigned Access
+-------------------
+
+windows 8
+pc settings -> accounts -> other accounts -> set up account for assigned access
+
+windows 10
+settings -> accounts -> other people -> set up assigned access
+
+choose an account to use - non admin account
+choose an app to use     - must be a windows store app
+
+to exit:
+windows 8  : press Windows key 5 times
+windows 10 : press Ctrl + Alt + Del 
+
+=======================================
+
+1.2 PowerShell set up Assigned Access
+-------------------------------------
+
+NAME
+    Set-AssignedAccess
+
+SYNTAX
+    Set-AssignedAccess -AppName <String> -UserName <String> [-Confirm] [-WhatIf] [<CommonParameters>]
+    
+    Set-AssignedAccess -AppName <String> -UserSID <String> [-Confirm] [-WhatIf] [<CommonParameters>]
+    
+    Set-AssignedAccess -AppUserModelId <String> -UserName <String> [-Confirm] [-WhatIf] [<CommonParameters>]
+    
+    Set-AssignedAccess -AppUserModelId <String> -UserSID <String> [-Confirm] [-WhatIf] [<CommonParameters>]
+    
+    
+DESCRIPTION
+    The Set-AssignedAccess cmdlet configures the specified user account so that it can use only one Windows Store app. 
+	The user cannot exit the app, sign out, or access any system settings.
+	
+note:
+To remove assigned access, using PowerShell, run the following cmdlet.
+	Clear-AssignedAccess
+	
+=======================================
+
+2. Kiosk Browser App (FIXME)
+--------------------
+
+install "Kiosk Browser" app in the Windows Store
+
+configure Kiosk Browser through provisioning or MDM
+
+??? not done yet 
+    -> needs to be configured
+    -> trying to use the Windows Configuration Designer, not successful yet
+
+=======================================
+
+3. Provisioning Package (FIXME)
+-----------------------
+
+install "Windows Configuration Designer" app in the Windows Store
+
+??? not done yet
+    -> unsuccessful with both Win32 && UWP
+    -> when trying to set up with a browser app gets the error message:
+         "We found some validation errors. To find out what went wrong and see suggestions on how to fix it, click this icon:  "
+ 
+=======================================
+
+4. Custom Shell Launcher (FIXME)
+------------------------
+
+??? not done yet
+
+Shell Launcher is an optional component and is not turned on by default in Windows 10. 
+It must be turned on prior to configuring.
+
+enable: To make the setting available to the device and optionally apply the settings to the device.
+
+Configure: To customize the setting or sub-settings.
+
+script -> start with the template
+
+
+ 
+=======================================
+
+not done yet:
+  * Kiosk Browser
+  * Provisioning Package     
+	  - App type: UWP or Win32
+  * Custom Shell Launcher           
+	  - App type: Win32
+	
+might not be able to use:
+  * Intune/other MDM service (trial version or buy) 
+	  - App type: UWP 
+
+
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  

@@ -1,0 +1,10 @@
+
+$variable = value
+
+To create a blank file: New-Item -ItemType file example.txt
+
+to source the location of a file uses "." as an operator to include in the scope
+
+to run another script from in a script uses "&" or ".\" or "Invoke-Expression"
+
+ 

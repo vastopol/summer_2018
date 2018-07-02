@@ -1,0 +1,55 @@
+KIOSK SETUP:
+------------
+
+* Set up a kiosk or digital signage on Windows 10 Pro, Enterprise, or Education
+    https://docs.microsoft.com/en-us/windows/configuration/setup-kiosk-digital-signage
+
+* Create a Kiosk Experience
+    https://docs.microsoft.com/en-us/windows-hardware/customize/enterprise/create-a-kiosk-image
+
+* Guidelines for choosing an app for assigned access (kiosk mode)
+    https://docs.microsoft.com/en-us/windows/configuration/guidelines-for-assigned-access-app
+
+* Automating Kiosk Mode in Windows
+	https://execmgr.net/2018/02/16/kiosk-mode-in-windows-overcoming-the-issues/
+	
+* Creating a Windows 10 internet kiosk using Microsoft Edge
+	https://www.htguk.com/creating-a-windows-10-internet-kiosk-using-microsoft-edge/
+
+* Set up Windows 10 in Kiosk Mode using Assigned Access
+    https://www.thewindowsclub.com/windows-10-kiosk-mode-assigned-access
+
+* How to Set up Chrome Browser Kiosk Mode in Windows 10
+    https://www.howto-connect.com/set-up-chrome-browser-kiosk-mode-windows-10/
+	
+=======================================
+
+POWERSHELL/ETC:
+---------------
+
+* Shell Launcher
+    https://docs.microsoft.com/en-us/windows-hardware/customize/enterprise/shell-launcher
+
+* Security Identifier(SID): GetSID of a user,object using Registry, WMIC, PowerShell
+    https://blogs.msdn.microsoft.com/gaurav/2014/06/03/security-identifiersid-getsid-of-a-userobject-using-registry-wmic-powershell/
+	
+* Find the Application User Model ID of an installed app
+    https://docs.microsoft.com/en-us/windows-hardware/customize/enterprise/find-the-application-user-model-id-of-an-installed-app
+	
+* Set-AssignedAccess
+    https://docs.microsoft.com/en-us/powershell/module/assignedaccess/set-assignedaccess?view=win10-ps
+
+* Configure assigned access by using Windows PowerShell
+    https://msdn.microsoft.com/en-us/library/windows/hardware/mt620044(v=vs.85).aspx
+
+=======================================
+	
+TOOLS:
+------
+
+* Windows Sysinternals - system utilities and technical information
+    https://docs.microsoft.com/en-us/sysinternals/
+
+=======================================
+
+...
