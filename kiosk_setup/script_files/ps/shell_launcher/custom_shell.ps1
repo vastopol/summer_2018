@@ -1,14 +1,16 @@
 ﻿<# 
-custom shell launcher 
-
-command line arguments:
-    1. USERNAME of a specific account
-    2. EXECUTABLE 
+custom shell launcher
 
 usage:
     .\custom_shell.ps1 <USERNAME> <EXECUTABLE>
-#>
 
+command line arguments:
+    1. USERNAME of a local account
+    2. EXECUTABLE to use as the custom shell
+
+requirements:
+    Windows 10 Enterprise or Windows 10 Education.	
+#>
 
 #----------------------------------------
 
@@ -41,10 +43,8 @@ static class CheckShellLauncherLicense
         [DllImport("Slc.dll")]
         internal static extern int SLGetWindowsInformationDWORD([MarshalAs(UnmanagedType.LPWStr)]string valueName, out int value);
     }
-
 }
 "@
-
     $type = Add-Type -TypeDefinition $source -PassThru
     return $type[0]::IsShellLauncherLicenseEnabled()
 }
@@ -59,8 +59,7 @@ function Get-UsernameSID($AccountName)
 
 #----------------------------------------
 
-<# disable check if license is enabled, maybe enable later
-
+# check if license is enabled
 [bool]$result = $false
 $result = Check-ShellLauncherLicenseEnabled
 "`nShell Launcher license enabled is set to " + $result
@@ -69,8 +68,6 @@ if (-not($result))
     "`nThis device doesn't have required license to use Shell Launcher"
     exit
 }
-
-#>
 
 # parameter error checking
 if($args.length -ne 2)
@@ -119,11 +116,11 @@ $ShellLauncherClass.SetDefaultShell("cmd.exe", $restart_device)
 $DefaultShellObject = $ShellLauncherClass.GetDefaultShell()
 "`nDefault Shell is set to " + $DefaultShellObject.Shell + " and the default action is set to " + $DefaultShellObject.defaultaction
 
-# Set EXECUTABLE as the shell for USER, and restart the machine if EXECUTABLE is closed.
-$ShellLauncherClass.SetCustomShell($USER_SID, $EXECUTABLE, ($null), ($null), $restart_shell)
-
 # Set Explorer as the shell for administrators.
 $ShellLauncherClass.SetCustomShell($Admins_SID, "explorer.exe")
+
+# Set EXECUTABLE as the shell for USER, and restart the machine if EXECUTABLE is closed.
+$ShellLauncherClass.SetCustomShell($USER_SID, $EXECUTABLE, ($null), ($null), $restart_shell)
 
 # View all the custom shells defined.
 "`nCurrent settings for custom shells:"
@@ -135,6 +132,7 @@ $IsShellLauncherEnabled = $ShellLauncherClass.IsEnabled()
 "`nEnabled is set to " + $IsShellLauncherEnabled.Enabled
 
 <#
+
 # Remove the new custom shells.
 $ShellLauncherClass.RemoveCustomShell($Admins_SID)
 $ShellLauncherClass.RemoveCustomShell($USER_SID)
@@ -143,5 +141,5 @@ $ShellLauncherClass.RemoveCustomShell($USER_SID)
 $ShellLauncherClass.SetEnabled($FALSE)
 $IsShellLauncherEnabled = $ShellLauncherClass.IsEnabled()
 "`nEnabled is set to " + $IsShellLauncherEnabled.Enabled
-#>
 
+#>

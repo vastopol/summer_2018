@@ -30,9 +30,6 @@ POWERSHELL/ETC:
 * Shell Launcher
     https://docs.microsoft.com/en-us/windows-hardware/customize/enterprise/shell-launcher
 
-* Security Identifier(SID): GetSID of a user,object using Registry, WMIC, PowerShell
-    https://blogs.msdn.microsoft.com/gaurav/2014/06/03/security-identifiersid-getsid-of-a-userobject-using-registry-wmic-powershell/
-	
 * Find the Application User Model ID of an installed app
     https://docs.microsoft.com/en-us/windows-hardware/customize/enterprise/find-the-application-user-model-id-of-an-installed-app
 	
@@ -44,12 +41,3 @@ POWERSHELL/ETC:
 
 =======================================
 	
-TOOLS:
-------
-
-* Windows Sysinternals - system utilities and technical information
-    https://docs.microsoft.com/en-us/sysinternals/
-
-=======================================
-
-...

@@ -1,13 +1,14 @@
-Setting up a kiosk for Windows 8 && 10 
+﻿Setting up a kiosk for Windows 8 && 10 
 --------------------------------------
 
 Options:
   0. Group Policy && Batch Files
   1. Assigned Access
+  2. Shell Launcher
 
 Notes:
-  * Assigned Access can only use App type: UWP 
-  * You cannot configure both Shell Launcher and Assigned Access on the same system.
+  * You cannot configure Assigned Access and Shell Launcher on the same system.
+  * Shell Launcher Requires Windows 10 Enterprise or Windows 10 Education to run.
 
 Application Types:
   * Win32 - Classic Windows
@@ -28,7 +29,7 @@ Microsoft Management Console:
 
 =======================================
 
-1.1 Assigned Access
+1.1 Assigned Access (UWP)
 -------------------
 
 Location:
@@ -43,9 +44,13 @@ Exit:
   windows 8  : press Windows key 5 times
   windows 10 : press Ctrl + Alt + Del 
 
+note:
+  some apps might not show up in the list of choices.
+  if that happens, use PowerShell for manual set up.
+  
 =======================================
 
-1.2 PowerShell set up Assigned Access
+1.2 PowerShell set up Assigned Access (UWP)
 -------------------------------------
 
 NAME
@@ -64,51 +69,33 @@ DESCRIPTION
     The Set-AssignedAccess cmdlet configures the specified user account so that it can use only one Windows Store app. 
 	The user cannot exit the app, sign out, or access any system settings.
 	
-note:
+undo:
     To remove assigned access, using PowerShell, run the following cmdlet.
 	Clear-AssignedAccess
+
+note:
+    to use Set-AssignedAccess need to know 1. (UserName or UserSID), and 2. (AppName or AppUserModelId)
+	to find a UserSID run PowerShell command "Get-WmiObject win32_useraccount"
+    to find an AppUserModelId use the listAumids method from Microsoft documentation.
+    (run the printAumids.ps1 script in the util folder, it prints a txt file with every Aumid)
 	
+  
 =======================================
 
-2. Kiosk Browser App (FIXME)
---------------------
+2. Shell Launcher  (Win32)
+-----------------
 
-install "Kiosk Browser" app in the Windows Store
+Requirements:
+  Windows 10 Enterprise or Windows 10 Education.	
 
-configure Kiosk Browser through provisioning or MDM
-
-??? not done yet 
-    -> needs to be configured
-    -> trying to use the Windows Configuration Designer, not successful yet
-
-=======================================
-
-3. Provisioning Package (FIXME)
------------------------
-
-install "Windows Configuration Designer" app in the Windows Store
-
-??? not done yet
-    -> unsuccessful with both Win32 && UWP
-    -> when trying to set up with a browser app gets the error message:
-         "We found some validation errors. To find out what went wrong and see suggestions on how to fix it, click this icon:  "
- 
-=======================================
-
-4. Custom Shell Launcher (FIXME)
-------------------------
-
-??? not done yet
-
-Shell Launcher is an optional component and is not turned on by default in Windows 10. 
-It must be turned on prior to configuring.
+Shell Launcher is an optional component and is not turned on by default in Windows 10, It must be turned on prior to configuring.
 
 cannot use Eshell.exe as a custom shell 
 cannot use a Universal Windows app as a custom shell
 cannot use a custom shell to launch Universal Windows apps
 cannot use an application that launches a different process and exits as a custom shell
 
-enable: To make the setting available to the device and optionally apply the settings to the device.
+Enable: To make the setting available to the device and optionally apply the settings to the device.
   * Control Panel -> programs and features -> turn windows features on or off
   * WESL_UserSetting
   * DISM
@@ -116,27 +103,72 @@ enable: To make the setting available to the device and optionally apply the set
   (used control panel, could not get DISM script running)	
 	
 Configure: To customize the setting or sub-settings.
+  * Assigned Access Configuration Service Provider (CSP)
+  * Use the Shell Launcher WMI providers directly in a PowerShell script or application
 
-script -> start with the template
+Script: start with the template and modify to fit needs
 
-xxx
+be careful: 
+  * changing the shell settings can break the functionality of the system
+  * if try running on non-Enterprise or non-Education then will load to a basically unusable black screen with no taskbar
+ 
+=======================================
+
+3. Kiosk Browser App (FIXME)
+--------------------
+
+install "Kiosk Browser" app in the Windows Store
+
+setup: ???
+-> needs to be configured
+-> configure Kiosk Browser through provisioning or MDM
+
+attempt 1:
+
+trying to use the Windows Configuration Designer, not successful yet
+
+attempt 2:
+
+since Kiosk Browser is UWP tried using PowerShell for Set-AssignedAccess with (UserName, AppUserModelId) && (UserSID, AppUserModelId)
+however, failed with different errors on separate tries
+
+Set-CimInstance : One or more parameter values passed to the method were invalid.
+At C:\WINDOWS\system32\WindowsPowerShell\v1.0\Modules\AssignedAccess\AssignedAccess.psm1:301 char:25
++ ... $instance | Set-CimInstance -Property @{AppUserModelId=$AppUserModelI ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidArgument: (WEDL_AssignedAc...10-13324431...):CimInstance) [Set-CimInstance], CimException
+    + FullyQualifiedErrorId : MI RESULT 4,Microsoft.Management.Infrastructure.CimCmdlets.SetCimInstanceCommand
+
+	
+New-CimInstance : One or more parameter values passed to the method were invalid.
+At C:\WINDOWS\system32\WindowsPowerShell\v1.0\Modules\AssignedAccess\AssignedAccess.psm1:310 char:13
++             New-CimInstance -ClassName WEDL_AssignedAccess -Property  ...
++             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidArgument: (WEDL_AssignedAccess:CimInstance) [New-CimInstance], CimException
+    + FullyQualifiedErrorId : MI RESULT 4,Microsoft.Management.Infrastructure.CimCmdlets.NewCimInstanceCommand
+	
+=======================================
+
+4. Provisioning Package (FIXME)
+-----------------------
+
+install "Windows Configuration Designer" app in the Windows Store
+
+setup: ???
+-> unsuccessful with both Win32 && UWP
+-> when trying to set up with a browser app gets the error message:
+     "We found some validation errors. To find out what went wrong and see suggestions on how to fix it, click this icon:  "
  
 =======================================
 
 not done yet:
   * Kiosk Browser
-  * Provisioning Package     
-	  - App type: UWP or Win32
-  * Custom Shell Launcher           
-	  - App type: Win32
+  * Provisioning Package (UWP or Win32)
 	
-might not be able to use:
-  * Intune/other MDM service (trial version or buy) 
-	  - App type: UWP 
-
-
-	  
-	  
+possibly unable to use:
+  * Intune/other MDM service (UWP)
+      - trial version or buy the licensing
+      - might not be possible to activate Kiosk Mode on Windows 10 Pro using Microsoft Intune Standalone. 
 	  
 	  
 	  
