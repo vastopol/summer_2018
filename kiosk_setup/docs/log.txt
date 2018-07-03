@@ -2,16 +2,16 @@ Setting up a kiosk for Windows 8 && 10
 --------------------------------------
 
 Options:
-0. Group Policy && Batch Files
-1. Assigned Access
+  0. Group Policy && Batch Files
+  1. Assigned Access
 
 Notes:
-* Assigned Access can only use App type: UWP 
-* You cannot configure both Shell Launcher and Assigned Access on the same system.
+  * Assigned Access can only use App type: UWP 
+  * You cannot configure both Shell Launcher and Assigned Access on the same system.
 
 Application Types:
-* Win32 - Classic Windows
-* UWP   - Universal Windows Platform (Windows Store apps)
+  * Win32 - Classic Windows
+  * UWP   - Universal Windows Platform (Windows Store apps)
 
 =======================================
 
@@ -21,28 +21,27 @@ Application Types:
 Configured similarly to the help document for windows 8
 
 Microsoft Management Console:
-* add a Group Policy Object
-* set up restrictions for the user account
-* run kioskbootstrap.bat at user logon
-    windows settings -> scripts -> logon -> add the batch files
+  * add a Group Policy Object
+  * set up restrictions for the user account
+  * run kioskbootstrap.bat at user logon
+      windows settings -> scripts -> logon -> add the batch files
 
 =======================================
 
 1.1 Assigned Access
 -------------------
 
-windows 8
-pc settings -> accounts -> other accounts -> set up account for assigned access
+Location:
+  windows 8  : pc settings -> accounts -> other accounts -> set up account for assigned access
+  windows 10 : settings -> accounts -> other people -> set up assigned access
 
-windows 10
-settings -> accounts -> other people -> set up assigned access
+Options:
+  choose an account to use - non admin account
+  choose an app to use     - must be a windows store app
 
-choose an account to use - non admin account
-choose an app to use     - must be a windows store app
-
-to exit:
-windows 8  : press Windows key 5 times
-windows 10 : press Ctrl + Alt + Del 
+Exit:
+  windows 8  : press Windows key 5 times
+  windows 10 : press Ctrl + Alt + Del 
 
 =======================================
 
@@ -61,13 +60,12 @@ SYNTAX
     
     Set-AssignedAccess -AppUserModelId <String> -UserSID <String> [-Confirm] [-WhatIf] [<CommonParameters>]
     
-    
 DESCRIPTION
     The Set-AssignedAccess cmdlet configures the specified user account so that it can use only one Windows Store app. 
 	The user cannot exit the app, sign out, or access any system settings.
 	
 note:
-To remove assigned access, using PowerShell, run the following cmdlet.
+    To remove assigned access, using PowerShell, run the following cmdlet.
 	Clear-AssignedAccess
 	
 =======================================
@@ -105,13 +103,23 @@ install "Windows Configuration Designer" app in the Windows Store
 Shell Launcher is an optional component and is not turned on by default in Windows 10. 
 It must be turned on prior to configuring.
 
-enable: To make the setting available to the device and optionally apply the settings to the device.
+cannot use Eshell.exe as a custom shell 
+cannot use a Universal Windows app as a custom shell
+cannot use a custom shell to launch Universal Windows apps
+cannot use an application that launches a different process and exits as a custom shell
 
+enable: To make the setting available to the device and optionally apply the settings to the device.
+  * Control Panel -> programs and features -> turn windows features on or off
+  * WESL_UserSetting
+  * DISM
+  * Windows Configuration Designer
+  (used control panel, could not get DISM script running)	
+	
 Configure: To customize the setting or sub-settings.
 
 script -> start with the template
 
-
+xxx
  
 =======================================
 

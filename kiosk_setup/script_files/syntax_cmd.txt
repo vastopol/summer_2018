@@ -1,0 +1,10 @@
+CMD
+
+comments
+use REM or ::
+
+SET variable=value
+
+:label
+GOTO label
+
