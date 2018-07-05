@@ -13,5 +13,6 @@ windows 10
 * Admin
 * kiosk  - group policy && batch files
 * kiosk2 - assigned access through powershell
-* kiosk3 - xxxx
+* kiosk3 - chrome kiosk
+* kiosk4 - xxxx
 

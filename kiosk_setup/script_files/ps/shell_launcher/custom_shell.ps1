@@ -17,7 +17,7 @@ requirements:
 # FUNCTIONS:
 
 # Check if shell launcher license is enabled
-function Check-ShellLauncherLicenseEnabled
+function Check-ShellLauncherLicenseEnabled()
 {
     [string]$source = @"
 using System;
@@ -31,7 +31,8 @@ static class CheckShellLauncherLicense
     {
         int enabled = 0;
 
-        if (NativeMethods.SLGetWindowsInformationDWORD("EmbeddedFeature-ShellLauncher-Enabled", out enabled) != S_OK) {
+        if(NativeMethods.SLGetWindowsInformationDWORD("EmbeddedFeature-ShellLauncher-Enabled", out enabled) != S_OK) 
+		{
             enabled = 0;
         }
 
@@ -63,7 +64,7 @@ function Get-UsernameSID($AccountName)
 [bool]$result = $false
 $result = Check-ShellLauncherLicenseEnabled
 "`nShell Launcher license enabled is set to " + $result
-if (-not($result))
+if(-not($result))
 {
     "`nThis device doesn't have required license to use Shell Launcher"
     exit

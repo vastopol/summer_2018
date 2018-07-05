@@ -1,14 +1,18 @@
-﻿Setting up a kiosk for Windows 8 && 10 
---------------------------------------
+﻿Setting up Kiosks for Windows 8 && 10 
+-------------------------------------
+
+Goals:
+  * Set up and configure secure kiosk 
+  * Kiosk should be running Google Chrome
+  * User should not be able to exit the browser or do anything else on PC
 
 Options:
-  0. Group Policy && Batch Files
-  1. Assigned Access
-  2. Shell Launcher
+  1. Group Policy && Batch Files
+  2. Assigned Access
+  3. Shell Launcher
 
 Notes:
   * You cannot configure Assigned Access and Shell Launcher on the same system.
-  * Shell Launcher Requires Windows 10 Enterprise or Windows 10 Education to run.
 
 Application Types:
   * Win32 - Classic Windows
@@ -16,10 +20,12 @@ Application Types:
 
 =======================================
 
-0. Group Policy && Batch Files
+1. Group Policy && Batch Files
 ------------------------------
 
-Configured similarly to the help document for windows 8
+Configured similarly to the help document for Windows 8
+
+Create a local user as a non admin account and use mmc to configure a group policy object for the user.
 
 Microsoft Management Console:
   * add a Group Policy Object
@@ -29,8 +35,11 @@ Microsoft Management Console:
 
 =======================================
 
-1.1 Assigned Access (UWP)
+2.1 Assigned Access (UWP)
 -------------------
+
+Requirements:
+  Windows 10 Enterprise, Windows 10 Education, or Windows 10 Pro
 
 Location:
   windows 8  : pc settings -> accounts -> other accounts -> set up account for assigned access
@@ -50,7 +59,7 @@ note:
   
 =======================================
 
-1.2 PowerShell set up Assigned Access (UWP)
+2.2 PowerShell set up Assigned Access (UWP)
 -------------------------------------
 
 NAME
@@ -75,25 +84,26 @@ undo:
 
 note:
     to use Set-AssignedAccess need to know 1. (UserName or UserSID), and 2. (AppName or AppUserModelId)
-	to find a UserSID run PowerShell command "Get-WmiObject win32_useraccount"
-    to find an AppUserModelId use the listAumids method from Microsoft documentation.
-    (run the printAumids.ps1 script in the util folder, it prints a txt file with every Aumid)
-	
-  
+	1. to find a UserSID use PowerShell command "Get-WmiObject win32_useraccount"
+    2. to find an AppUserModelId use the listAumids method from Microsoft documentation.
+       (run the printAumids.ps1 script in the util folder, it prints a txt file with every Aumid)
+	  
 =======================================
 
-2. Shell Launcher  (Win32)
+3. Shell Launcher  (Win32)
 -----------------
 
 Requirements:
-  Windows 10 Enterprise or Windows 10 Education.	
+  Windows 10 Enterprise or Windows 10 Education
 
-Shell Launcher is an optional component and is not turned on by default in Windows 10, It must be turned on prior to configuring.
+Shell Launcher is an optional component and is not turned on by default in Windows 10. 
+It must be turned on prior to configuring.
 
-cannot use Eshell.exe as a custom shell 
-cannot use a Universal Windows app as a custom shell
-cannot use a custom shell to launch Universal Windows apps
-cannot use an application that launches a different process and exits as a custom shell
+Restrictions:
+  * cannot use Eshell.exe as a custom shell 
+  * cannot use a Universal Windows app as a custom shell
+  * cannot use a custom shell to launch Universal Windows apps
+  * cannot use an application that launches a different process and exits as a custom shell
 
 Enable: To make the setting available to the device and optionally apply the settings to the device.
   * Control Panel -> programs and features -> turn windows features on or off
@@ -106,73 +116,33 @@ Configure: To customize the setting or sub-settings.
   * Assigned Access Configuration Service Provider (CSP)
   * Use the Shell Launcher WMI providers directly in a PowerShell script or application
 
-Script: start with the template and modify to fit needs
+Script: 
+  * start with the default template and modify to fit needs
 
-be careful: 
-  * changing the shell settings can break the functionality of the system
+note: 
+  * changing the shell settings can break the functionality of the operating system
   * if try running on non-Enterprise or non-Education then will load to a basically unusable black screen with no taskbar
  
 =======================================
 
-3. Kiosk Browser App (FIXME)
---------------------
+4. xxxx
+-------
 
-install "Kiosk Browser" app in the Windows Store
+xxxx
 
-setup: ???
--> needs to be configured
--> configure Kiosk Browser through provisioning or MDM
-
-attempt 1:
-
-trying to use the Windows Configuration Designer, not successful yet
-
-attempt 2:
-
-since Kiosk Browser is UWP tried using PowerShell for Set-AssignedAccess with (UserName, AppUserModelId) && (UserSID, AppUserModelId)
-however, failed with different errors on separate tries
-
-Set-CimInstance : One or more parameter values passed to the method were invalid.
-At C:\WINDOWS\system32\WindowsPowerShell\v1.0\Modules\AssignedAccess\AssignedAccess.psm1:301 char:25
-+ ... $instance | Set-CimInstance -Property @{AppUserModelId=$AppUserModelI ...
-+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    + CategoryInfo          : InvalidArgument: (WEDL_AssignedAc...10-13324431...):CimInstance) [Set-CimInstance], CimException
-    + FullyQualifiedErrorId : MI RESULT 4,Microsoft.Management.Infrastructure.CimCmdlets.SetCimInstanceCommand
-
-	
-New-CimInstance : One or more parameter values passed to the method were invalid.
-At C:\WINDOWS\system32\WindowsPowerShell\v1.0\Modules\AssignedAccess\AssignedAccess.psm1:310 char:13
-+             New-CimInstance -ClassName WEDL_AssignedAccess -Property  ...
-+             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    + CategoryInfo          : InvalidArgument: (WEDL_AssignedAccess:CimInstance) [New-CimInstance], CimException
-    + FullyQualifiedErrorId : MI RESULT 4,Microsoft.Management.Infrastructure.CimCmdlets.NewCimInstanceCommand
-	
 =======================================
 
-4. Provisioning Package (FIXME)
------------------------
+Conclusion
+----------
 
-install "Windows Configuration Designer" app in the Windows Store
+* Group Policy && Batch Files is a partially complete solution, it allows a minimized Chrome window to be run and respawned.
+  However, it requires much manual configuration, and the system is not 100% in a "lockdown" mode. Many things can be restricted
+  or hidden, but it seems like some things can't be disabled so easily.  eg: user can access taskbar through Windows button, etc
 
-setup: ???
--> unsuccessful with both Win32 && UWP
--> when trying to set up with a browser app gets the error message:
-     "We found some validation errors. To find out what went wrong and see suggestions on how to fix it, click this icon:  "
- 
+* Assigned Access is not practical since it only works with UWP apps, and because Google Chrome a Win32 app, it cannot be used.
+  However, Microsoft Edge can be used with Assigned Access.
+
+* Shell Launcher would be practical if running on Enterprise or Education distributions of Windows.
+
 =======================================
 
-not done yet:
-  * Kiosk Browser
-  * Provisioning Package (UWP or Win32)
-	
-possibly unable to use:
-  * Intune/other MDM service (UWP)
-      - trial version or buy the licensing
-      - might not be possible to activate Kiosk Mode on Windows 10 Pro using Microsoft Intune Standalone. 
-	  
-	  
-	  
-	  
-	  
-	  
-	  

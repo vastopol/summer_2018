@@ -1,5 +1,12 @@
-KIOSK SETUP:
+KIOSK SETUP: 
 ------------
+
+(through Browser)
+
+* How to Set up Chrome Browser Kiosk Mode in Windows 10
+    https://www.howto-connect.com/set-up-chrome-browser-kiosk-mode-windows-10/
+
+(through Windows)
 
 * Set up a kiosk or digital signage on Windows 10 Pro, Enterprise, or Education
     https://docs.microsoft.com/en-us/windows/configuration/setup-kiosk-digital-signage
@@ -7,21 +14,12 @@ KIOSK SETUP:
 * Create a Kiosk Experience
     https://docs.microsoft.com/en-us/windows-hardware/customize/enterprise/create-a-kiosk-image
 
+* Set up Windows 10 in Kiosk Mode using Assigned Access
+    https://www.thewindowsclub.com/windows-10-kiosk-mode-assigned-access
+	
 * Guidelines for choosing an app for assigned access (kiosk mode)
     https://docs.microsoft.com/en-us/windows/configuration/guidelines-for-assigned-access-app
 
-* Automating Kiosk Mode in Windows
-	https://execmgr.net/2018/02/16/kiosk-mode-in-windows-overcoming-the-issues/
-	
-* Creating a Windows 10 internet kiosk using Microsoft Edge
-	https://www.htguk.com/creating-a-windows-10-internet-kiosk-using-microsoft-edge/
-
-* Set up Windows 10 in Kiosk Mode using Assigned Access
-    https://www.thewindowsclub.com/windows-10-kiosk-mode-assigned-access
-
-* How to Set up Chrome Browser Kiosk Mode in Windows 10
-    https://www.howto-connect.com/set-up-chrome-browser-kiosk-mode-windows-10/
-	
 =======================================
 
 POWERSHELL/ETC:
@@ -30,14 +28,34 @@ POWERSHELL/ETC:
 * Shell Launcher
     https://docs.microsoft.com/en-us/windows-hardware/customize/enterprise/shell-launcher
 
+* Configure assigned access by using Windows PowerShell
+    https://msdn.microsoft.com/en-us/library/windows/hardware/mt620044(v=vs.85).aspx
+	
+* Assigned access Windows PowerShell reference
+    https://docs.microsoft.com/en-us/powershell/module/assignedaccess/?view=win10-ps
+
 * Find the Application User Model ID of an installed app
     https://docs.microsoft.com/en-us/windows-hardware/customize/enterprise/find-the-application-user-model-id-of-an-installed-app
 	
-* Set-AssignedAccess
-    https://docs.microsoft.com/en-us/powershell/module/assignedaccess/set-assignedaccess?view=win10-ps
-
-* Configure assigned access by using Windows PowerShell
-    https://msdn.microsoft.com/en-us/library/windows/hardware/mt620044(v=vs.85).aspx
-
 =======================================
+	
+(suspect) - but has potential
+
+* Automating Kiosk Mode in Windows
+	https://execmgr.net/2018/02/16/kiosk-mode-in-windows-overcoming-the-issues/
+
+* Creating a Windows 10 internet kiosk using Microsoft Edge
+	https://www.htguk.com/creating-a-windows-10-internet-kiosk-using-microsoft-edge/
+	
+* Different Shells for Different Users
+    https://docs.microsoft.com/en-us/previous-versions/windows/embedded/ms838576(v=winembedded.5)
+	
+* How to run an application as shell replacement on Windows 10 Enterprise
+    https://stackoverflow.com/questions/33364908/how-to-run-an-application-as-shell-replacement-on-windows-10-enterprise
+
+* Auto log off user after a program is closed
+    http://www.edugeek.net/forums/windows/33732-auto-log-off-user-after-program-closed.html
+	
+* Windows 10 - Embedded Shell Launcher
+    https://code.vmware.com/samples/3523/windows-10---embedded-shell-launcher
 	
