@@ -13,7 +13,7 @@
 	</Settings>
 
     note:
-	  interval has to be greater than or equal to 1 second to give window enough time
+      interval has to be greater than or equal to 1 second to give window enough time
       to pop up and cover anything visible. eg: the terminal
 #>
 
@@ -56,8 +56,8 @@ while(1)
 	
     if($ProcessActive -eq $null)
     {
-	    Start-Process $prgm -ArgumentList $arguments
-	}
+        Start-Process $prgm -ArgumentList $arguments
+    }
 	
 	Start-Sleep -s $INTERVAL
 } 

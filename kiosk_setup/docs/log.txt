@@ -8,7 +8,7 @@ Goals:
   * User should not be able to exit the browser or do anything else on PC
 
 Options:
-  1. Group Policy && Batch Files
+  1. Group Policy && Scripts
   2. Assigned Access
   3. Shell Launcher
 
@@ -21,8 +21,8 @@ Application Types:
 
 =======================================
 
-1. Group Policy && Batch Files
-------------------------------
+1. Group Policy && Scripts
+--------------------------
 
 Probably the most flexible option in terms of what can be done.
 Browser application can be launched by custom scripts with either Command Prompt and PowerShell.
@@ -89,7 +89,7 @@ Undo:
 
 Note:
     to use Set-AssignedAccess need to know 1. (UserName or UserSID), and 2. (AppName or AppUserModelId)
-	1. to find a UserSID use PowerShell command "Get-WmiObject win32_useraccount"
+    1. to find a UserSID use PowerShell command "Get-WmiObject win32_useraccount"
     2. to find an AppUserModelId use the listAumids method from Microsoft documentation.
        (run the printAumids.ps1 script in the util folder, it prints a txt file with every Aumid)
 	  
@@ -140,15 +140,15 @@ Conclusion
 ----------
 
 Satisfactory:
-  * Group Policy && Batch Files is a complete solution, it allows a minimized Chrome window to be run and respawned.
+  * Group Policy && Scripts is a complete solution, it allows a minimized Chrome window to be run and respawned.
     However, it requires much manual configuration. eg: many things must be restricted or hidden.
 
 Possibly Satisfactory:  
   * Assigned Access is not practical for Chrome since it only works with UWP apps, and because Google Chrome a Win32 app, it cannot be used.
     However, Microsoft Edge can be used with Assigned Access if set through PowerShell.
-	But, according to Microsoft documentation: 
-	  "Microsoft Edge and any third-party web browsers that can be set as a default browser have special permissions 
-	   beyond that of most Windows apps. Microsoft Edge is not currently supported for assigned access."
+    But, according to Microsoft documentation: 
+      "Microsoft Edge and any third-party web browsers that can be set as a default browser have special permissions 
+       beyond that of most Windows apps. Microsoft Edge is not currently supported for assigned access."
 
   * Shell Launcher would probably be practical if running on Enterprise or Education distributions of Windows.
     However, currently since running Windows 10 Pro, not able to fully test solution.

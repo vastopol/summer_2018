@@ -10,7 +10,8 @@ command line arguments:
     2. EXECUTABLE to use as the custom shell
 
 requirements:
-    Windows 10 Enterprise or Windows 10 Education.	
+    Windows 10 Enterprise or Windows 10 Education.
+	
 #>
 
 #----------------------------------------
@@ -75,8 +76,8 @@ if(-not($result))
 if($args.length -ne 2)
 {
     echo "Error: incorrect number of arguments"
-	echo "Usage: .\custom_shell.ps1 <USERNAME> <EXECUTABLE>"
-	exit
+    echo "Usage: .\custom_shell.ps1 <USERNAME> <EXECUTABLE>"
+    exit
 }
 
 # default variables
