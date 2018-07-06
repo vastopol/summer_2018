@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Settings>
+	<Main>
+	  <URL>https://chassintranet.ucr.edu/saas2/advisor</URL>
+	  <KIOSK>True</KIOSK> 
+	  <INTERVAL>1</INTERVAL> 
+	</Main>
+</Settings>

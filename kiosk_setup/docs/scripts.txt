@@ -1,0 +1,13 @@
+script notes for app:
+
+killing explorer.exe hides PC interface, useful for the scripts to do before entering loop. 
+the taskkill module is supported in both Command Prompt and PowerShell
+use: "taskkill /f /im explorer.exe"
+
+ 
+solution for when explorer.exe is killed and can no longer access anything
+but does not work if some settings are disabled ... eg: must remove the users access to these features
+when explorer.exe is killed
+then Ctrl + Alt + Del to get to Task Manager
+then right click on an app or background process -> open file location
+then when window pops up click on address bar at the top and enter "explorer.exe"

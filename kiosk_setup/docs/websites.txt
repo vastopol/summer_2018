@@ -1,11 +1,6 @@
 KIOSK SETUP: 
 ------------
 
-(through Browser)
-
-* How to Set up Chrome Browser Kiosk Mode in Windows 10
-    https://www.howto-connect.com/set-up-chrome-browser-kiosk-mode-windows-10/
-
 (through Windows)
 
 * Set up a kiosk or digital signage on Windows 10 Pro, Enterprise, or Education
@@ -17,16 +12,18 @@ KIOSK SETUP:
 * Set up Windows 10 in Kiosk Mode using Assigned Access
     https://www.thewindowsclub.com/windows-10-kiosk-mode-assigned-access
 	
-* Guidelines for choosing an app for assigned access (kiosk mode)
-    https://docs.microsoft.com/en-us/windows/configuration/guidelines-for-assigned-access-app
-
-=======================================
-
-POWERSHELL/ETC:
----------------
-
 * Shell Launcher
     https://docs.microsoft.com/en-us/windows-hardware/customize/enterprise/shell-launcher
+
+(through Script)
+
+* Automating Kiosk Mode in Windows
+    https://execmgr.net/2018/02/16/kiosk-mode-in-windows-overcoming-the-issues/
+	
+=======================================
+
+POWERSHELL:
+-----------
 
 * Configure assigned access by using Windows PowerShell
     https://msdn.microsoft.com/en-us/library/windows/hardware/mt620044(v=vs.85).aspx
@@ -41,11 +38,8 @@ POWERSHELL/ETC:
 	
 (suspect) - but has potential
 
-* Automating Kiosk Mode in Windows
-	https://execmgr.net/2018/02/16/kiosk-mode-in-windows-overcoming-the-issues/
-
 * Creating a Windows 10 internet kiosk using Microsoft Edge
-	https://www.htguk.com/creating-a-windows-10-internet-kiosk-using-microsoft-edge/
+    https://www.htguk.com/creating-a-windows-10-internet-kiosk-using-microsoft-edge/
 	
 * Different Shells for Different Users
     https://docs.microsoft.com/en-us/previous-versions/windows/embedded/ms838576(v=winembedded.5)

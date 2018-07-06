@@ -1,15 +1,19 @@
-Errors in setup
----------------
+Errors/Failures in setup
+------------------------
 
-unsatisfactory:
+Documents attempted solutions that either failed or were deemed unsatisfactory.
+Either the solution was unable to be setup/configured properly, or it accomplished 
+the task, but is unsuitable for use in production by itself.
+
+Unsatisfactory:
   * Google Chrome Kiosk
 
-error:
+Error:
   * Kiosk Browser
   * Provisioning Package (UWP or Win32)
 	
-unable to use:
-  * Intune/other MDM service (UWP)
+Unable to use:
+  * Microsoft Intune/other MDM service (UWP)
       - trial version or buy the licensing
       - might not be possible to activate Kiosk Mode on Windows 10 Pro using Microsoft Intune Standalone. 
 	  
@@ -18,48 +22,43 @@ unable to use:
 0. Google Chrome Kiosk (UNSAT)
 ----------------------
 
-setting up the chrome browser to run in kiosk mode for a specific user
-this is the simplest way to set up a kiosk, but not a good method.
+Setting up the chrome browser to run in kiosk mode for a specific user.
+This is the simplest way to set up a kiosk, but not a good method.
 
-* inside of chrome browser under the dot dot dot button (...)
+* Inside of chrome browser under the dot dot dot button (...)
  
-* settings -> people -> manage other people -> add person
+* Settings -> people -> manage other people -> add person
 
-* make a desktop shortcut
+* Make a desktop shortcut
 
-* modify the properties of the shortcut to include "-kiosk" flag at the end of the target
+* Modify the properties of the shortcut to include "-kiosk" flag at the end of the target
 
-note:
-  not very useful/secure by itself, just a browser running in kiosk mode, nothing is actually locked down.
-  if the user exits the browser (Alt + F4) then they have access to whole computer. The browser window does not auto respawn.
-  could be better in conjunction with group policy object
+Note:
+  Not very useful/secure by itself, just a browser running in kiosk mode, nothing is actually locked down.
+  If the user exits the browser (Alt + F4) then they have access to whole computer. The browser window does not auto respawn.
   
-error:
-  sometimes the keyboard does not work in the chrome kiosk, so unable to enter text
-
+***** For security purposes must be used in conjunction with something else. *****
+  
 =======================================
+
 1. Kiosk Browser App (ERROR)
 --------------------
 
 Requirements:
   Windows 10 version 1803 or higher
 
-install "Kiosk Browser" app in the Windows Store
+Setup:
+  * Install "Kiosk Browser" app in the Windows Store
+  * Configure Kiosk Browser through provisioning or MDM
 
-setup: ???
--> needs to be configured
--> configure Kiosk Browser through provisioning or MDM
+Attempt 1:
+  Trying to use the Windows Configuration Designer, unsuccessful
 
-attempt 1:
+Attempt 2:
+  Since Kiosk Browser is UWP tried using PowerShell for Set-AssignedAccess with (UserName, AppUserModelId) and (UserSID, AppUserModelId)
+  However, failed with 2 different errors on separate tries
 
-trying to use the Windows Configuration Designer, not successful yet
-
-attempt 2:
-
-since Kiosk Browser is UWP tried using PowerShell for Set-AssignedAccess with (UserName, AppUserModelId) && (UserSID, AppUserModelId)
-however, failed with 2 different errors on separate tries
-
-*** Error 1 ***
+***** Error 1 *****
 
 Set-CimInstance : One or more parameter values passed to the method were invalid.
 At C:\WINDOWS\system32\WindowsPowerShell\v1.0\Modules\AssignedAccess\AssignedAccess.psm1:301 char:25
@@ -68,7 +67,7 @@ At C:\WINDOWS\system32\WindowsPowerShell\v1.0\Modules\AssignedAccess\AssignedAcc
     + CategoryInfo          : InvalidArgument: (WEDL_AssignedAc...10-13324431...):CimInstance) [Set-CimInstance], CimException
     + FullyQualifiedErrorId : MI RESULT 4,Microsoft.Management.Infrastructure.CimCmdlets.SetCimInstanceCommand
 
-*** Error 2 ***
+***** Error 2 *****
 	
 New-CimInstance : One or more parameter values passed to the method were invalid.
 At C:\WINDOWS\system32\WindowsPowerShell\v1.0\Modules\AssignedAccess\AssignedAccess.psm1:310 char:13
@@ -82,9 +81,10 @@ At C:\WINDOWS\system32\WindowsPowerShell\v1.0\Modules\AssignedAccess\AssignedAcc
 2. Provisioning Package (ERROR)
 -----------------------
 
-install "Windows Configuration Designer" app in the Windows Store
+Setup:
+  * Install "Windows Configuration Designer" app in the Windows Store
 
-setup: ???
+???
 -> unsuccessful with both Win32 && UWP
 -> when trying to set up with a browser app gets the error message:
      "We found some validation errors. To find out what went wrong and see suggestions on how to fix it, click this icon:  "
@@ -92,25 +92,10 @@ setup: ???
  
 =======================================
 
-3. AUTOMATING KIOSK MODE IN WINDOWS by Dan Padgett
---------------------------------------------------
+3. xxxx
+-------
 
-article:
-https://execmgr.net/2018/02/16/kiosk-mode-in-windows-overcoming-the-issues/
-
-source for .ps1:
-https://gist.github.com/danjpadgett/435f8b43c36d740aad55fe23c014e499
-
-source for .exe && .xml:
-https://onedrive.live.com/?authkey=%21AJUXazIeLurD58M&id=2BD8BA5E21A068F3%2112928&cid=2BD8BA5E21A068F3
-
-unable to run the .exe file on this computer
-
--> pick up here later ...
+xxxx
 
 =======================================
-
-
-
-
 

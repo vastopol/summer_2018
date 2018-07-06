@@ -1,6 +1,9 @@
-:: chrome kiosk
+:: chrome kiosk 2
 :: kills explorer to hide PC interface
-:: launch chrome and wait for exit, on close will open a new window
+:: infinite loop to launch chrome in kiosk mode 
+:: on browser exit will open a new window
+
+@echo off
 
 :: variables
 set prgm="C:\Program Files\Google\Chrome\Application\chrome.exe"

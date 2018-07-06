@@ -1,4 +1,5 @@
-﻿<# 
+﻿<#
+
 custom shell launcher
 
 usage:
@@ -32,7 +33,7 @@ static class CheckShellLauncherLicense
         int enabled = 0;
 
         if(NativeMethods.SLGetWindowsInformationDWORD("EmbeddedFeature-ShellLauncher-Enabled", out enabled) != S_OK) 
-		{
+        {
             enabled = 0;
         }
 

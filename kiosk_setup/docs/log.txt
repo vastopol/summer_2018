@@ -4,6 +4,7 @@
 Goals:
   * Set up and configure secure kiosk 
   * Kiosk should be running Google Chrome
+  * Start page destination -> https://chassintranet.ucr.edu/saas2/advisor
   * User should not be able to exit the browser or do anything else on PC
 
 Options:
@@ -23,15 +24,19 @@ Application Types:
 1. Group Policy && Batch Files
 ------------------------------
 
-Configured similarly to the help document for Windows 8
+Probably the most flexible option in terms of what can be done.
+Browser application can be launched by custom scripts with either Command Prompt and PowerShell.
+Group Policies can be configured similarly to our already existing help document for Windows 8
 
-Create a local user as a non admin account and use mmc to configure a group policy object for the user.
+Steps:
+  * Create a local user as a non admin account
+  * Use MMC to configure a group policy object for the user
 
 Microsoft Management Console:
   * add a Group Policy Object
   * set up restrictions for the user account
-  * run kioskbootstrap.bat at user logon
-      windows settings -> scripts -> logon -> add the batch files
+  * run script at user logon
+      windows settings -> scripts -> logon -> add the script files
 
 =======================================
 
@@ -53,7 +58,7 @@ Exit:
   windows 8  : press Windows key 5 times
   windows 10 : press Ctrl + Alt + Del 
 
-note:
+Note:
   some apps might not show up in the list of choices.
   if that happens, use PowerShell for manual set up.
   
@@ -78,11 +83,11 @@ DESCRIPTION
     The Set-AssignedAccess cmdlet configures the specified user account so that it can use only one Windows Store app. 
 	The user cannot exit the app, sign out, or access any system settings.
 	
-undo:
+Undo:
     To remove assigned access, using PowerShell, run the following cmdlet.
 	Clear-AssignedAccess
 
-note:
+Note:
     to use Set-AssignedAccess need to know 1. (UserName or UserSID), and 2. (AppName or AppUserModelId)
 	1. to find a UserSID use PowerShell command "Get-WmiObject win32_useraccount"
     2. to find an AppUserModelId use the listAumids method from Microsoft documentation.
@@ -96,14 +101,11 @@ note:
 Requirements:
   Windows 10 Enterprise or Windows 10 Education
 
-Shell Launcher is an optional component and is not turned on by default in Windows 10. 
-It must be turned on prior to configuring.
-
 Restrictions:
-  * cannot use Eshell.exe as a custom shell 
-  * cannot use a Universal Windows app as a custom shell
-  * cannot use a custom shell to launch Universal Windows apps
-  * cannot use an application that launches a different process and exits as a custom shell
+  * Cannot use Eshell.exe as a custom shell 
+  * Cannot use a Universal Windows app as a custom shell
+  * Cannot use a custom shell to launch Universal Windows apps
+  * Cannot use an application that launches a different process and exits as a custom shell
 
 Enable: To make the setting available to the device and optionally apply the settings to the device.
   * Control Panel -> programs and features -> turn windows features on or off
@@ -117,11 +119,13 @@ Configure: To customize the setting or sub-settings.
   * Use the Shell Launcher WMI providers directly in a PowerShell script or application
 
 Script: 
-  * start with the default template and modify to fit needs
+  * Start with the default template and modify to fit needs
 
-note: 
-  * changing the shell settings can break the functionality of the operating system
-  * if try running on non-Enterprise or non-Education then will load to a basically unusable black screen with no taskbar
+Note: 
+  * Shell Launcher is an optional component and is not turned on by default in Windows 10. 
+    It must be turned on prior to configuring.
+  * Changing the shell settings can alter the functionality of the operating system
+  * If try running on non-Enterprise or non-Education then will load to a basically unusable black screen with no taskbar
  
 =======================================
 
@@ -135,14 +139,22 @@ xxxx
 Conclusion
 ----------
 
-* Group Policy && Batch Files is a partially complete solution, it allows a minimized Chrome window to be run and respawned.
-  However, it requires much manual configuration, and the system is not 100% in a "lockdown" mode. Many things can be restricted
-  or hidden, but it seems like some things can't be disabled so easily.  eg: user can access taskbar through Windows button, etc
+Satisfactory:
+  * Group Policy && Batch Files is a complete solution, it allows a minimized Chrome window to be run and respawned.
+    However, it requires much manual configuration. eg: many things must be restricted or hidden.
 
-* Assigned Access is not practical since it only works with UWP apps, and because Google Chrome a Win32 app, it cannot be used.
-  However, Microsoft Edge can be used with Assigned Access.
+Possibly Satisfactory:  
+  * Assigned Access is not practical for Chrome since it only works with UWP apps, and because Google Chrome a Win32 app, it cannot be used.
+    However, Microsoft Edge can be used with Assigned Access if set through PowerShell.
+	But, according to Microsoft documentation: 
+	  "Microsoft Edge and any third-party web browsers that can be set as a default browser have special permissions 
+	   beyond that of most Windows apps. Microsoft Edge is not currently supported for assigned access."
 
-* Shell Launcher would be practical if running on Enterprise or Education distributions of Windows.
+  * Shell Launcher would probably be practical if running on Enterprise or Education distributions of Windows.
+    However, currently since running Windows 10 Pro, not able to fully test solution.
 
+Unsatisfactory:	
+  * See error_log.txt
+	
 =======================================
 
