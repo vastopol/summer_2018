@@ -141,7 +141,7 @@ Conclusion
 
 Satisfactory:
   * Group Policy && Scripts is a complete solution, it allows a minimized Chrome window to be run and respawned.
-    However, it requires much manual configuration. eg: many things must be restricted or hidden.
+    This requires much careful manual configuration. eg: many things must be restricted or hidden.
 
 Possibly Satisfactory:  
   * Assigned Access is not practical for Chrome since it only works with UWP apps, and because Google Chrome a Win32 app, it cannot be used.
@@ -151,7 +151,7 @@ Possibly Satisfactory:
        beyond that of most Windows apps. Microsoft Edge is not currently supported for assigned access."
 
   * Shell Launcher would probably be practical if running on Enterprise or Education distributions of Windows.
-    However, currently since running Windows 10 Pro, not able to fully test solution.
+    However, since running Windows 10 Pro, it does not correctly work so we cannot fully test solution.
 
 Unsatisfactory:	
   * See error_log.txt

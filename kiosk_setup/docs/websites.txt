@@ -1,7 +1,8 @@
 KIOSK SETUP: 
-------------
+links and resources grouped by category
+=======================================
 
-(through Windows)
+(Windows Settings)
 
 * Set up a kiosk or digital signage on Windows 10 Pro, Enterprise, or Education
     https://docs.microsoft.com/en-us/windows/configuration/setup-kiosk-digital-signage
@@ -12,19 +13,10 @@ KIOSK SETUP:
 * Set up Windows 10 in Kiosk Mode using Assigned Access
     https://www.thewindowsclub.com/windows-10-kiosk-mode-assigned-access
 	
-* Shell Launcher
-    https://docs.microsoft.com/en-us/windows-hardware/customize/enterprise/shell-launcher
-
-(through Script)
-
-* Automating Kiosk Mode in Windows
-    https://execmgr.net/2018/02/16/kiosk-mode-in-windows-overcoming-the-issues/
-	
 =======================================
-
-POWERSHELL:
------------
-
+	
+(PowerShell)
+	
 * Configure assigned access by using Windows PowerShell
     https://msdn.microsoft.com/en-us/library/windows/hardware/mt620044(v=vs.85).aspx
 	
@@ -33,13 +25,20 @@ POWERSHELL:
 
 * Find the Application User Model ID of an installed app
     https://docs.microsoft.com/en-us/windows-hardware/customize/enterprise/find-the-application-user-model-id-of-an-installed-app
-	
+
 =======================================
 	
-(suspect) - but has potential
+(Custom Script)
 
-* Creating a Windows 10 internet kiosk using Microsoft Edge
-    https://www.htguk.com/creating-a-windows-10-internet-kiosk-using-microsoft-edge/
+* Shell Launcher
+    https://docs.microsoft.com/en-us/windows-hardware/customize/enterprise/shell-launcher
+
+* Automating Kiosk Mode in Windows
+    https://execmgr.net/2018/02/16/kiosk-mode-in-windows-overcoming-the-issues/
+	
+=======================================
+
+MAYBE... probably not, but has potential to work
 	
 * Different Shells for Different Users
     https://docs.microsoft.com/en-us/previous-versions/windows/embedded/ms838576(v=winembedded.5)
@@ -53,3 +52,6 @@ POWERSHELL:
 * Windows 10 - Embedded Shell Launcher
     https://code.vmware.com/samples/3523/windows-10---embedded-shell-launcher
 	
+* Creating a Windows 10 internet kiosk using Microsoft Edge
+    https://www.htguk.com/creating-a-windows-10-internet-kiosk-using-microsoft-edge/
+

@@ -1,6 +1,6 @@
 ﻿# vars
-$dest = "https://chassintranet.ucr.edu/saas2/advisor -kiosk"
 $prgm = "chrome.exe"
+$dest = "https://chassintranet.ucr.edu/saas2/advisor -kiosk"
 
 # kill explorer
 taskkill /f /im explorer.exe

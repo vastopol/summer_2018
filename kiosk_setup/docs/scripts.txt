@@ -1,13 +1,59 @@
-script notes for app:
+Scripts for kiosk
+-----------------
+
+the scripts are the dynamic part which focuses or running the application.
+the group policies are the static part which enforces security in the background.
+
+these are fairly simple scripts written either as .bat file or .ps1 file.
+the basic structure is an infinite loop in which a chrome kiosk window is opened.
+these scripts optionally can have advanced features like being parameterized through a .xml file.
+
+example Batch file
+----------------------------------------
+@echo off
+
+:: variables
+set prgm="C:\Program Files\Google\Chrome\Application\chrome.exe"
+set dest="https://chassintranet.ucr.edu/saas2/advisor"
+
+:: kill explorer
+taskkill /f /im explorer.exe
+
+:: Run browser in kiosk mode infinite loop
+:launch
+%prgm% %dest% -kiosk 
+goto launch
+----------------------------------------
+
+example Powershell script
+----------------------------------------
+# vars
+$prgm = "chrome.exe"
+$dest = "https://chassintranet.ucr.edu/saas2/advisor -kiosk"
+
+# kill explorer
+taskkill /f /im explorer.exe
+
+# main
+while(1)
+{
+    Start-Process $prgm -ArgumentList $dest -Wait -WindowStyle Minimized
+}
+----------------------------------------
+
+these scripts combined with group policies can accomplish the task.
 
 killing explorer.exe hides PC interface, useful for the scripts to do before entering loop. 
-the taskkill module is supported in both Command Prompt and PowerShell
-use: "taskkill /f /im explorer.exe"
+then the user should not be able to use the start button or taskbar at all.
+the taskkill module is supported in both Command Prompt and PowerShell.
+use "taskkill /f /im explorer.exe"
 
- 
-solution for when explorer.exe is killed and can no longer access anything
-but does not work if some settings are disabled ... eg: must remove the users access to these features
-when explorer.exe is killed
+group policies must be set up correctly or users can access stuff they should not be able to.
+
+example:
+when explorer.exe is killed and can no longer access anything
 then Ctrl + Alt + Del to get to Task Manager
 then right click on an app or background process -> open file location
 then when window pops up click on address bar at the top and enter "explorer.exe"
+However, this does not work if some settings are disabled, so must remove the users access to these features
+
