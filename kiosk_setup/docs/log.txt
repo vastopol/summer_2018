@@ -1,8 +1,8 @@
-﻿Setting up Kiosks for Windows 8 && 10 
--------------------------------------
+﻿Setting up Kiosks for Windows 8.1 && 10 
+---------------------------------------
 
 Goals:
-  * Set up and configure secure kiosk 
+  * Set up and configure a secure internet kiosk 
   * Kiosk should be running Google Chrome
   * Start page destination -> https://chassintranet.ucr.edu/saas2/advisor
   * User should not be able to exit the browser or do anything else on PC
@@ -13,7 +13,10 @@ Options:
   3. Shell Launcher
 
 Notes:
+  * Some of these methods only work with one type of application (Win32 or UWP).
+  * Some of these methods only work with specific editions of Windows (RT, Pro, Education, Enterprise, etc...).
   * You cannot configure Assigned Access and Shell Launcher on the same system.
+  * Shell Launcher is not available for Windows 8.1 since it is specific to Windows 10.
 
 Application Types:
   * Win32 - Classic Windows
@@ -21,22 +24,25 @@ Application Types:
 
 =======================================
 
-1. Group Policy && Scripts
+1. Group Policy && Scripts (Win32)
 --------------------------
 
 Probably the most flexible option in terms of what can be done.
 Browser application can be launched by custom scripts with either Command Prompt and PowerShell.
-Group Policies can be configured similarly to our already existing help document for Windows 8
+Group Policies can be configured similarly to our already existing Windows 8.1 help document.
 
 Steps:
   * Create a local user as a non admin account
   * Use MMC to configure a group policy object for the user
 
 Microsoft Management Console:
-  * add a Group Policy Object
-  * set up restrictions for the user account
-  * run script at user logon
-      windows settings -> scripts -> logon -> add the script files
+  * Add a Group Policy Object
+  * Set up restrictions for the user account
+  * Run script at user logon
+      Windows settings -> Scripts -> Logon -> Add the script files
+
+Note:
+  There is no standard way to launch UWP apps from the command line.      
 
 =======================================
 
@@ -44,23 +50,24 @@ Microsoft Management Console:
 -------------------
 
 Requirements:
-  Windows 10 Enterprise, Windows 10 Education, or Windows 10 Pro
+  Windows 8.1 - RT, Pro, or Enterprise
+  Windows 10  - Pro, Education, or Enterprise
 
 Location:
-  windows 8  : pc settings -> accounts -> other accounts -> set up account for assigned access
-  windows 10 : settings -> accounts -> other people -> set up assigned access
+  Windows 8.1 - PC settings -> Accounts -> Other accounts -> Set up account for assigned access
+  Windows 10  - Settings    -> Accounts -> Other people   -> Set up assigned access
 
 Options:
-  choose an account to use - non admin account
-  choose an app to use     - must be a windows store app
+  Choose an account to use - non admin account
+  Choose an app to use     - must be a UWP app
 
 Exit:
-  windows 8  : press Windows key 5 times
-  windows 10 : press Ctrl + Alt + Del 
+  Windows 8.1 - press Windows key 5 times
+  Windows 10  - press Ctrl + Alt + Del 
 
 Note:
-  some apps might not show up in the list of choices.
-  if that happens, use PowerShell for manual set up.
+  Some apps might not show up in the list of choices.
+  If that happens, use PowerShell for manual set up.
   
 =======================================
 
@@ -81,25 +88,24 @@ SYNTAX
     
 DESCRIPTION
     The Set-AssignedAccess cmdlet configures the specified user account so that it can use only one Windows Store app. 
-	The user cannot exit the app, sign out, or access any system settings.
-	
+    The user cannot exit the app, sign out, or access any system settings.
+    
 Undo:
-    To remove assigned access, using PowerShell, run the following cmdlet.
-	Clear-AssignedAccess
+    To remove Assigned Access using PowerShell, use the Clear-AssignedAccess cmdlet.
 
 Note:
-    to use Set-AssignedAccess need to know 1. (UserName or UserSID), and 2. (AppName or AppUserModelId)
-    1. to find a UserSID use PowerShell command "Get-WmiObject win32_useraccount"
-    2. to find an AppUserModelId use the listAumids method from Microsoft documentation.
-       (run the printAumids.ps1 script in the util folder, it prints a txt file with every Aumid)
-	  
+    To use Set-AssignedAccess need to know 1. (UserName or UserSID), and 2. (AppName or AppUserModelId)
+    1. To find a UserSID use PowerShell command "Get-WmiObject win32_useraccount"
+    2. To find an AppUserModelId use the listAumids method from Microsoft documentation.
+       (Run the printAumids.ps1 script in the util folder, it prints a .txt file with every Aumid)
+      
 =======================================
 
-3. Shell Launcher  (Win32)
+3. Shell Launcher (Win32)
 -----------------
 
 Requirements:
-  Windows 10 Enterprise or Windows 10 Education
+  Windows 10 - Education or Enterprise
 
 Restrictions:
   * Cannot use Eshell.exe as a custom shell 
@@ -112,8 +118,8 @@ Enable: To make the setting available to the device and optionally apply the set
   * WESL_UserSetting
   * DISM
   * Windows Configuration Designer
-  (used control panel, could not get DISM script running)	
-	
+  (used control panel, could not get DISM script running)   
+    
 Configure: To customize the setting or sub-settings.
   * Assigned Access Configuration Service Provider (CSP)
   * Use the Shell Launcher WMI providers directly in a PowerShell script or application
@@ -124,16 +130,9 @@ Script:
 Note: 
   * Shell Launcher is an optional component and is not turned on by default in Windows 10. 
     It must be turned on prior to configuring.
-  * Changing the shell settings can alter the functionality of the operating system
-  * If try running on non-Enterprise or non-Education then will load to a basically unusable black screen with no taskbar
+  * Changing the shell settings can alter the functionality of the operating system.
+  * If running on non-Enterprise or non-Education then will load to a basically unusable black screen with no taskbar.
  
-=======================================
-
-4. xxxx
--------
-
-xxxx
-
 =======================================
 
 Conclusion
@@ -145,16 +144,18 @@ Satisfactory:
 
 Possibly Satisfactory:  
   * Assigned Access is not practical for Chrome since it only works with UWP apps, and because Google Chrome a Win32 app, it cannot be used.
-    However, Microsoft Edge can be used with Assigned Access if set through PowerShell.
-    But, according to Microsoft documentation: 
+    However,
+      On Windows 8.1, Internet Explorer can be used with Assigned Access.
+      On Windows 10, Microsoft Edge can be used with Assigned Access if set through PowerShell.
+    But, according to Microsoft documentation for Windows 10: 
       "Microsoft Edge and any third-party web browsers that can be set as a default browser have special permissions 
        beyond that of most Windows apps. Microsoft Edge is not currently supported for assigned access."
 
   * Shell Launcher would probably be practical if running on Enterprise or Education distributions of Windows.
     However, since running Windows 10 Pro, it does not correctly work so we cannot fully test solution.
 
-Unsatisfactory:	
-  * See error_log.txt
-	
+Unsatisfactory: 
+  * See error_log.txt for more information.
+    
 =======================================
 

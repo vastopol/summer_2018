@@ -1,5 +1,5 @@
 KIOSK SETUP: 
-links and resources grouped by category
+Links and resources grouped by category
 =======================================
 
 (Windows Settings)
@@ -38,7 +38,7 @@ links and resources grouped by category
 	
 =======================================
 
-MAYBE... probably not, but has potential to work
+Maybe has potential to work...
 	
 * Different Shells for Different Users
     https://docs.microsoft.com/en-us/previous-versions/windows/embedded/ms838576(v=winembedded.5)
@@ -46,9 +46,6 @@ MAYBE... probably not, but has potential to work
 * How to run an application as shell replacement on Windows 10 Enterprise
     https://stackoverflow.com/questions/33364908/how-to-run-an-application-as-shell-replacement-on-windows-10-enterprise
 
-* Auto log off user after a program is closed
-    http://www.edugeek.net/forums/windows/33732-auto-log-off-user-after-program-closed.html
-	
 * Windows 10 - Embedded Shell Launcher
     https://code.vmware.com/samples/3523/windows-10---embedded-shell-launcher
 	

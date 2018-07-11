@@ -1,4 +1,4 @@
-Errors/Failures in setup
+﻿Errors/Failures in setup
 ------------------------
 
 Documents attempted solutions that either failed or were deemed unsatisfactory.
@@ -90,12 +90,5 @@ Setup:
      "We found some validation errors. To find out what went wrong and see suggestions on how to fix it, click this icon:  "
 -> however no information is displayed, and unable to click on the icon. so unknown what is actually causing validation errors. 
  
-=======================================
-
-3. xxxx
--------
-
-xxxx
-
 =======================================
 

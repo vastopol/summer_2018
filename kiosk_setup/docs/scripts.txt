@@ -1,31 +1,34 @@
 Scripts for kiosk
 -----------------
 
-the scripts are the dynamic part which focuses or running the application.
-the group policies are the static part which enforces security in the background.
+The scripts are the dynamic part which focuses or running the application.
+The group policies are the static part which enforces security in the background.
+These scripts combined with group policies can accomplish the task.
 
-these are fairly simple scripts written either as .bat file or .ps1 file.
-the basic structure is an infinite loop in which a chrome kiosk window is opened.
-these scripts optionally can have advanced features like being parameterized through a .xml file.
+These are fairly simple scripts written either as .bat file or .ps1 file.
+The basic structure is an infinite loop in which a chrome kiosk window is opened.
 
-example Batch file
+These scripts optionally can have advanced features like being parameterized through a .xml file.
+The advanced features are only available if using PowerShell.
+
+Example Batch file
 ----------------------------------------
 @echo off
 
 :: variables
-set prgm="C:\Program Files\Google\Chrome\Application\chrome.exe"
-set dest="https://chassintranet.ucr.edu/saas2/advisor"
+set prgm=chrome.exe
+set dest=https://chassintranet.ucr.edu/saas2/advisor
 
 :: kill explorer
 taskkill /f /im explorer.exe
 
 :: Run browser in kiosk mode infinite loop
 :launch
-%prgm% %dest% -kiosk 
+start /wait %prgm% -kiosk %dest% 
 goto launch
 ----------------------------------------
 
-example Powershell script
+Example PowerShell script
 ----------------------------------------
 # vars
 $prgm = "chrome.exe"
@@ -37,23 +40,53 @@ taskkill /f /im explorer.exe
 # main
 while(1)
 {
-    Start-Process $prgm -ArgumentList $dest -Wait -WindowStyle Minimized
+    Start-Process $prgm -ArgumentList $dest -Wait
 }
 ----------------------------------------
 
-these scripts combined with group policies can accomplish the task.
+Notes:
 
-killing explorer.exe hides PC interface, useful for the scripts to do before entering loop. 
-then the user should not be able to use the start button or taskbar at all.
-the taskkill module is supported in both Command Prompt and PowerShell.
-use "taskkill /f /im explorer.exe"
+All of the methods used here are just one way of solving the problem, there are many ways of running the same/similar commands.
+The code for creating/initializing variables and running taskkill are similar for both Command Prompt and PowerShell.
+The main loops are semantically equivalent, and differ only syntactically on the use of an explicit while loop or label/goto pairs.
+Differences in the way things are handled by the interpreters changes how to structure and run certain commands.
+Essentially both do the same thing, the important part is where the 2 scripts are different on how the browser program is run.
+* Command Prompt 
+  - "start /wait PRGM.EXE ARGS"
+  - The "-kiosk" flag appears between the PRGM.EXE and ARGS parts
+  - Neither PRGM.EXE or ARGS are in quotes.
+* PowerShell     
+  - "Start-Process PRGM.EXE -ArgumentList ARGS -Wait"
+  - The "-kiosk" flag appears in the ARGS string separated by a space
+  - Both PRGM.EXE or ARGS are in quotes
+  
+Misc:
 
-group policies must be set up correctly or users can access stuff they should not be able to.
+Killing explorer.exe hides PC interface, useful for the scripts to do before entering the loop. 
+Then the user should not be able to use the start button or taskbar at all.
+The taskkill module is supported in both Command Prompt and PowerShell.
+Use "taskkill /f /im explorer.exe"
+This will force kill the image of the executable, useful for killing processes which auto-respawn when killed.
+Also must correctly set up Group Policies or users can access things they should not be able to.
 
-example:
-when explorer.exe is killed and can no longer access anything
-then Ctrl + Alt + Del to get to Task Manager
-then right click on an app or background process -> open file location
-then when window pops up click on address bar at the top and enter "explorer.exe"
-However, this does not work if some settings are disabled, so must remove the users access to these features
+Examples:
 
+Suppose a script has already run and the kiosk browser window is open
+The script would have killed explorer.exe so the user can no longer access anything
+From here multiple options:
+1. Run
+   * Press Win + R to open Run
+   * Then enter "explorer.exe"
+2. File Explorer
+   * Press Win + E to open File Explorer
+     Then click on address bar at the top and enter "explorer.exe"
+3. Task Manager
+   * Then press Ctrl+Shift+Esc to open Task Manager, OR press Ctrl + Alt + Del to get to menu -> Task Manager
+   * Then either
+     1. Click on file option in menu bar -> run new task -> enter "explorer.exe"
+     OR
+     2. Right click on an app or background process -> open file location
+        Then when File Explorer window pops up click on address bar at the top and enter "explorer.exe"
+
+There are always multiple ways for user to do something.
+Must use Group Policies to remove the users access to these features.
