@@ -5,24 +5,21 @@ The scripts are the dynamic part which focuses or running the application.
 The group policies are the static part which enforces security in the background.
 These scripts combined with group policies can accomplish the task.
 
-These are fairly simple scripts written either as .bat file or .ps1 file.
+These are fairly simple scripts written either as .bat file, .ps1 file, .vbs, etc...
 The basic structure is an infinite loop in which a chrome kiosk window is opened.
-
-These scripts optionally can have advanced features like being parameterized through a .xml file.
-The advanced features are only available if using PowerShell.
+The scripts optionally can have advanced features such as:
+  * being parameterized through a .xml file.
+  * have message boxes popup when actions occur
 
 Example Batch file
 ----------------------------------------
 @echo off
 
-:: variables
 set prgm=chrome.exe
 set dest=https://chassintranet.ucr.edu/saas2/advisor
 
-:: kill explorer
 taskkill /f /im explorer.exe
 
-:: Run browser in kiosk mode infinite loop
 :launch
 start /wait %prgm% -kiosk %dest% 
 goto launch
@@ -30,41 +27,57 @@ goto launch
 
 Example PowerShell script
 ----------------------------------------
-# vars
 $prgm = "chrome.exe"
 $dest = "https://chassintranet.ucr.edu/saas2/advisor -kiosk"
 
-# kill explorer
 taskkill /f /im explorer.exe
 
-# main
 while(1)
 {
     Start-Process $prgm -ArgumentList $dest -Wait
 }
 ----------------------------------------
 
+Example VBScript
+----------------------------------------
+sCmd1 = "taskkill /f /im explorer.exe"
+sCmd2 = "chrome.exe -kiosk"
+sDest = "https://chassintranet.ucr.edu/saas2/advisor"
+
+Set wShell = CreateObject("wscript.shell") 
+
+wShell.run sCmd1
+
+Do While(1)
+  wShell.run sCmd2, 1, true
+Loop
+----------------------------------------
+
 Notes:
 
 All of the methods used here are just one way of solving the problem, there are many ways of running the same/similar commands.
-The code for creating/initializing variables and running taskkill are similar for both Command Prompt and PowerShell.
-The main loops are semantically equivalent, and differ only syntactically on the use of an explicit while loop or label/goto pairs.
-Differences in the way things are handled by the interpreters changes how to structure and run certain commands.
-Essentially both do the same thing, the important part is where the 2 scripts are different on how the browser program is run.
+The code for creating/initializing variables and running taskkill are similar for all of the scripts.
+The main loops are semantically equivalent, and differ only syntactically on the use of an explicit while loop or label/goto pair.
+Differences in the way things are handled by the languages changes how to structure and run certain commands.
+Essentially all do the same thing, the important part is where the scripts are different on how the browser program is run.
 * Command Prompt 
   - "start /wait PRGM.EXE ARGS"
-  - The "-kiosk" flag appears between the PRGM.EXE and ARGS parts
-  - Neither PRGM.EXE or ARGS are in quotes.
+  - The "-kiosk" flag appears between the PRGM.EXE and ARGS strings
+  - None of the strings are in quotes.
 * PowerShell     
   - "Start-Process PRGM.EXE -ArgumentList ARGS -Wait"
   - The "-kiosk" flag appears in the ARGS string separated by a space
-  - Both PRGM.EXE or ARGS are in quotes
+  - All of the strings are in quotes
+* VBScript
+  - need a wscript.shell object and a string, then call the run subroutine
+  - The "-kiosk" flag appears in the string separated by a space
+  - All of the strings are in quotes
   
 Misc:
 
 Killing explorer.exe hides PC interface, useful for the scripts to do before entering the loop. 
 Then the user should not be able to use the start button or taskbar at all.
-The taskkill module is supported in both Command Prompt and PowerShell.
+The taskkill module is supported in Command Prompt, PowerShell, and VBScript.
 Use "taskkill /f /im explorer.exe"
 This will force kill the image of the executable, useful for killing processes which auto-respawn when killed.
 Also must correctly set up Group Policies or users can access things they should not be able to.
@@ -88,5 +101,7 @@ From here multiple options:
      2. Right click on an app or background process -> open file location
         Then when File Explorer window pops up click on address bar at the top and enter "explorer.exe"
 
-There are always multiple ways for user to do something.
+In each of these examples the user opens explorer.exe to get the interface back, 
+but nothing is stopping them from opening another application, or doing something else.
+There are always multiple ways for user to access or do something.
 Must use Group Policies to remove the users access to these features.

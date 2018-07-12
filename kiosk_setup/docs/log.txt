@@ -28,7 +28,7 @@ Application Types:
 --------------------------
 
 Probably the most flexible option in terms of what can be done.
-Browser application can be launched by custom scripts with either Command Prompt and PowerShell.
+Browser application can be launched by custom scripts with Command Prompt, PowerShell, VBScript, etc...
 Group Policies can be configured similarly to our already existing Windows 8.1 help document.
 
 Steps:
