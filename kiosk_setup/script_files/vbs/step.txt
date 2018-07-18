@@ -10,3 +10,65 @@ possible steps for launch vbs on start
 
 5. Add a new string value named Shell to "HKEY_Current_User\Software\Microsoft\Windows NT\CurrentVersion\Winlogon"
    with a value of the command that you need to run to execute your script "wscript C:\dir\script.vbs"
+
+
+----------------------------------------
+
+Different Shells for Different Users
+
+The registry for each user account and administrator account can be set up to start a user-specific shell.
+There are three keys that must be set up. The first two are generic for all users.
+This article refers to the keys as "Key1," "Key2," and "Key3" for simplicity.
+
+Key1 is a string value. When Windows XP starts, Key1 is called and the default Windows shell is started.
+However, if the default value is changed to USR:Software\Microsoft\Windows NT\CurrentVersion\Winlogon
+Windows looks in the HKEY_Current_User key to start a specific shell for the user logging on.
+If the specific user shell is not found, Key2 is called and a default shell is started.
+
+Key: HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\IniFileMapping\system.ini\boot\Shell
+
+Type: REG_SZ
+
+Value: SYS:Microsoft\Windows NT\CurrentVersion\Winlogon
+
+Key2 provides a default shell if the user shell application cannot be found.
+When you select a shell component for a Microsoft Windows XP Embedded configuration
+Key 2 is set up to the shell application as the default shell.
+
+Key: HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Winlogon\Shell
+
+Type: REG_SZ
+
+Value: Explorer.exe (or this can be a different default application)
+
+Key3 sets up a shell for the current user or logged-on user.
+Thus, the only way to change a particular user's shell is to log on to the user account and create this registry entry.
+
+Key: HKEY_Current_User\Software\Microsoft\Windows NT\CurrentVersion\Winlogon\Shell
+
+Type: REG_SZ
+
+Value: **c:\windows\system32\**account shell.exe, where account shell.exe is the name of the application
+
+
+When the user logs on, Windows uses Key1 to determine which key holds the shell information. Normally, Windows uses Key2 next. 
+However, if the value of Key1 is changed to USR:Software\Microsoft\Windows NT\CurrentVersion\Winlogon,
+Windows will use Key3 for the user logging on to start the user's specific shell.
+
+
+Setting Up Key1
+You must set up Key1. In the Extra Registry Data, found at the top of the configuration, add Key1 as described earlier,
+with the value set for USR:Software\Microsoft\Windows NT\CurrentVersion\Winlogon.
+To see the Extra Registry Data resource, you may have to enable resources by clicking View,
+pointing at Resources, and then clicking Target Designer.
+
+Setting Up Key3
+To set up the user account with the unique shell, you must log on to the user account and add Key3 to set the path to the system application. 
+Note that you cannot log on to the administrator account to change the user account's shell. 
+After you log on to the user account, you can use Regedit.exe, Windows Script, or another application
+to create Key3 and set the path to the application.
+
+
+If you decide to use a Windows Script Engine, you must modify the registry data for 
+the Windows Script Engine component for the Microsoft Visual Basic® Scripting Edition (VBScript) file. 
+Change HKEY_CLASSES_ROOT\VBSFile\Shell\Open\Command and add %1 to the end of the value %11%\WScript.exe

@@ -4,6 +4,7 @@
 Goals:
   * Set up and configure a secure internet kiosk 
   * Kiosk should be running Google Chrome
+  * Browser caching should be disabled
   * Start page destination -> https://chassintranet.ucr.edu/saas2/advisor
   * User should not be able to exit the browser or do anything else on PC
 

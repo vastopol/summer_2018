@@ -38,7 +38,9 @@ Links and resources grouped by category
 	
 =======================================
 
-Maybe has potential to work...
+sites that maybe has potential to work...
+
+Kiosk 
 	
 * Different Shells for Different Users
     https://docs.microsoft.com/en-us/previous-versions/windows/embedded/ms838576(v=winembedded.5)
@@ -52,3 +54,13 @@ Maybe has potential to work...
 * Creating a Windows 10 internet kiosk using Microsoft Edge
     https://www.htguk.com/creating-a-windows-10-internet-kiosk-using-microsoft-edge/
 
+Group Policy 
+
+* Group Policy Management Console Scripting Samples
+    https://gallery.technet.microsoft.com/Group-Policy-Management-17a5f840
+
+* Simplify Group Policy Administration with Windows PowerShell
+    https://technet.microsoft.com/en-us/library/2007.05.grouppolicy.aspx
+
+* Automating Group Policy Management with Windows PowerShell
+    https://technet.microsoft.com/en-us/library/2009.06.gpmanagement.aspx

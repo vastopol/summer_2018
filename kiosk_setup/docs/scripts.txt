@@ -8,7 +8,7 @@ These scripts combined with group policies can accomplish the task.
 These are fairly simple scripts written either as .bat file, .ps1 file, .vbs, etc...
 The basic structure is an infinite loop in which a chrome kiosk window is opened.
 The scripts optionally can have advanced features such as:
-  * being parameterized through a .xml file.
+  * being parameterized through a .xml file
   * have message boxes popup when actions occur
 
 Example Batch file
@@ -49,7 +49,7 @@ Set wShell = CreateObject("wscript.shell")
 wShell.run sCmd1
 
 Do While(1)
-  wShell.run sCmd2, 1, true
+  wShell.run sCmd2 & " " & sDest, 1, true
 Loop
 ----------------------------------------
 
