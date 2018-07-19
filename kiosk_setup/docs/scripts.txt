@@ -21,7 +21,7 @@ set dest=https://chassintranet.ucr.edu/saas2/advisor
 taskkill /f /im explorer.exe
 
 :launch
-start /wait %prgm% -kiosk %dest% 
+  start /wait %prgm% -kiosk %dest% 
 goto launch
 ----------------------------------------
 
@@ -34,7 +34,7 @@ taskkill /f /im explorer.exe
 
 while(1)
 {
-    Start-Process $prgm -ArgumentList $dest -Wait
+  Start-Process $prgm -ArgumentList $dest -Wait
 }
 ----------------------------------------
 

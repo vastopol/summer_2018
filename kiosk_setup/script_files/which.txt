@@ -1,0 +1,28 @@
+the working options for kiosk loop
+----------------------------------------
+
+CMD
+  * simple kiosk 1
+    (kioskbootstrap.bat & kioskstart.bat)
+
+  * simple kiosk 2
+    (test3.bat)
+
+PS
+  * simple kiosk 3
+    (test_chrome2.ps1)
+
+  * kiosk parameterized through and xml file
+    (loop_kiosk_v2.ps1 & settings.xml )
+
+VBS
+  * kiosk pops up a message when closed
+    (vb_test2.vbs)
+
+----------------------------------------
+
+not working...
+
+so far the setup through regedit and group policy config automation have failed
+have to be careful with registry keys, and the reg scripts have to be run on the user's account who is the kiosk.
+
