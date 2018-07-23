@@ -45,6 +45,9 @@ Kiosk
 * Different Shells for Different Users
     https://docs.microsoft.com/en-us/previous-versions/windows/embedded/ms838576(v=winembedded.5)
 	
+* Building Public Kiosk Workstations
+    https://blogs.technet.microsoft.com/keithmayer/2012/08/03/building-public-kiosk-workstations-with-windows-7-and-windows8-itpro/
+
 * How to run an application as shell replacement on Windows 10 Enterprise
     https://stackoverflow.com/questions/33364908/how-to-run-an-application-as-shell-replacement-on-windows-10-enterprise
 

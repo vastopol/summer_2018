@@ -14,9 +14,7 @@ Check the “Disable cache” box.
 
 ** DRAWBACK: the Developer Tools window has to be open the whole time for browser caching to be disabled **
 
-
-There are two more options to disable page caching in Chrome for good:
-
+----------------------------------------
 
 1. Deactivate Chrome Cache in the Registry
 
@@ -36,6 +34,7 @@ leave the path to chrome.exe as it is
 
 If you copy the line, be sure to check, if the quotes are actual quotes.
 
+----------------------------------------
 
 2. Deactivate Chrome cache by changing the shortcut properties
 

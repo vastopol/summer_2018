@@ -1,4 +1,4 @@
-﻿Setting up Kiosks for Windows 8.1 && 10 
+﻿Setting up Internet Kiosks for Windows 
 ---------------------------------------
 
 Goals:
@@ -15,8 +15,10 @@ Options:
 
 Notes:
   * Some of these methods only work with one type of application (Win32 or UWP).
+  * Some of these methods only work with specific versions of Windows (8.1 and 10)
   * Some of these methods only work with specific editions of Windows (RT, Pro, Education, Enterprise, etc...).
   * You cannot configure Assigned Access and Shell Launcher on the same system.
+  * Assigned Access is not available for Windows 7 since it is specific to Windows 8.1 and 10.
   * Shell Launcher is not available for Windows 8.1 since it is specific to Windows 10.
 
 Application Types:
@@ -141,7 +143,9 @@ Conclusion
 
 Satisfactory:
   * Group Policy && Scripts is a complete solution, it allows a minimized Chrome window to be run and respawned.
-    This requires much careful manual configuration. eg: many things must be restricted or hidden.
+    This solution was tested and worked correctly on Windows 7, 8.1, and 10 Pro edition
+    This requires careful manual configuration since many things must be restricted or hidden.
+    However, with proper configuration this seems like the most stable and secure option to use.
 
 Possibly Satisfactory:  
   * Assigned Access is not practical for Chrome since it only works with UWP apps, and because Google Chrome a Win32 app, it cannot be used.
