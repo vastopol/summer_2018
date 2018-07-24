@@ -1,4 +1,4 @@
-Random notes on things
+Random notes on the google chrome cache
 ----------------------------------------
 
 disable cache in chrome:

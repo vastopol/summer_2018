@@ -69,9 +69,10 @@ Essentially all do the same thing, the important part is where the scripts are d
   - The "-kiosk" flag appears in the ARGS string separated by a space
   - All of the strings are in quotes
 * VBScript
-  - need a wscript.shell object and a string, then call the run subroutine
+  - Need a wscript.shell object and a string, then call the shell's run subroutine
   - The "-kiosk" flag appears in the string separated by a space
-  - All of the strings are in quotes
+  - All of the commands are strings in quotes which are used by the run subroutine
+  - The final string is concatenated of command and destination, run subroutine is called on it with windowing set to 1, and wait set to true.
   
 Misc:
 

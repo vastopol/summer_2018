@@ -21,6 +21,12 @@ VBS
 
 ----------------------------------------
 
+currently we have establised multiple solutions for the kiosk application
+now the main focus is on 3 new things for scripts:
+1. the automation of making the group policy object
+2. possibly not needing the loop application by configuring regisrty keys for user shell
+3. clearing the google chrome cache
+
 not working...
 
 so far the setup through regedit and group policy config automation have failed

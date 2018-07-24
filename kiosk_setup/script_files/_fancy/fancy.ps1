@@ -1,0 +1,16 @@
+
+
+$wShell = New-Object -ComObject Wscript.Shell;
+
+(New-Object -COM Wscript.Shell).PopUp("Business Technology would like to reboot this computer!`n`n", 0, "Business Technology Software Update", 49)
+
+[System.Windows.Forms.MessageBox]::Show("Business Technology would like to reboot this computer!`n`n", "Business Technology Software Update", "OKCancel", "Warning" )
+
+<#
+
+https://techfornonprofits.com/2015/04/15/powershell-simple-gui-message-boxes/
+
+https://blogs.technet.microsoft.com/poshchap/2014/09/04/scripting-tips-and-tricks-message-boxes/
+
+#>
+

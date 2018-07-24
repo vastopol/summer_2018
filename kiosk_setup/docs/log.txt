@@ -45,7 +45,9 @@ Microsoft Management Console:
       Windows settings -> Scripts -> Logon -> Add the script files
 
 Note:
-  There is no standard way to launch UWP apps from the command line.      
+  * There is no standard way to launch UWP apps from the command line.
+  * The current solution for the scripts only focuses on the application side of the problem.
+  * There should exist a way to automate the construction of Group Policy Objects, but not completed yet.  
 
 =======================================
 
@@ -133,8 +135,10 @@ Script:
 Note: 
   * Shell Launcher is an optional component and is not turned on by default in Windows 10. 
     It must be turned on prior to configuring.
-  * Changing the shell settings can alter the functionality of the operating system.
-  * If running on non-Enterprise or non-Education then will load to a basically unusable black screen with no taskbar.
+  * If running on non-Enterprise or non-Education then the result from calling Check-ShellLauncherLicenseEnabled()
+    should prevent this from running since it doesn't have the required license to use Shell Launcher.
+    If this check is bypassed Windows will allow you to configure the settings and designate a shell.
+    However, when login occurs, it will basically load to an unusable black screen with no taskbar and not function.
  
 =======================================
 
@@ -155,9 +159,11 @@ Possibly Satisfactory:
     But, according to Microsoft documentation for Windows 10: 
       "Microsoft Edge and any third-party web browsers that can be set as a default browser have special permissions 
        beyond that of most Windows apps. Microsoft Edge is not currently supported for assigned access."
-
+    Overall, Assigned Access could serve as a backup solution for situations where using the 
+	   
   * Shell Launcher would probably be practical if running on Enterprise or Education distributions of Windows.
-    However, since running Windows 10 Pro, it does not correctly work so we cannot fully test solution.
+    If we were able to upgrade our systems to be running a different edition of Windows then we could use this.
+    However, since running Windows 10 Pro, it does not correctly work so we cannot fully test our solution.
 
 Unsatisfactory: 
   * See error_log.txt for more information.

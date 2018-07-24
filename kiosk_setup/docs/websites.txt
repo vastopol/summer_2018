@@ -1,5 +1,14 @@
-KIOSK SETUP: 
+KIOSK SETUP RESOURCES
+
 Links and resources grouped by category
+
+Some of the best general sites:
+* Microsoft Docs
+* Microsoft Developer Network
+* Microsoft TechNet
+* Windows Sysinternals
+* stackoverflow
+
 =======================================
 
 (Windows Settings)
