@@ -48,3 +48,76 @@ there is a space and a hyphen after ...chrome.exe"
 
 leave the path to chrome.exe as it is
 
+
+----------------------------------------
+
+3. physically delete folders on disk
+
+
+what i do...
+
+  $location = "C:\Users\$env:UserName\AppData\Local\Google\Chrome"
+  Remove-Item $location -Force -Recurse
+
+----
+what others do???
+
+In Chrome, you can clear the cache by deleting the contents of the Cache folder in %LocalAppData%\Google\Chrome\User Data\Default\Cache.
+The history, cookies, and so on are SQLite database files in the parent folder
+ 
+ $Items = @('Archived History',
+            'Cache\*',
+            'Cookies',
+            'History',
+            'Login Data',
+            'Top Sites',
+            'Visited Links',
+            'Web Data')
+$Folder = "$($env:LOCALAPPDATA)\Google\Chrome\User Data\Default"
+$Items | ForEach-Object { 
+    if((Test-Path -Path "$Folder\$_" )){
+        Remove-Item "$Folder\$_" 
+    }
+}
+
+
+
+$Items = @('Archived History',
+            'Cache\*',
+            'Cookies',
+            'History',
+            #'Login Data',
+            'Top Sites',
+            'Visited Links'
+            #'Web Data'
+            )
+$Folders = Get-ChildItem "$($env:LOCALAPPDATA)\Google\Chrome\User Data" | ?{ $_.PSIsContainer -and $_.Name -eq "Default" -or $_.Name -like "Profile*"}
+$Folders | ForEach-Object {
+    $tmp = $_
+    $Items | ForEach-Object { 
+        if((Test-Path -Path "$tmp\$_" )){
+            Remove-Item "$tmp\$_" 
+        }
+    }
+}
+
+
+
+ECHO --------------------------------------
+ECHO **** Clearing Chrome cache
+taskkill /F /IM "chrome.exe">nul 2>&1
+
+set ChromeDataDir="C:\Users\%USERNAME%\AppData\Local\Google\Chrome\User Data\Default"
+set ChromeCache=%ChromeDataDir%\Cache>nul 2>&1  
+del /q /s /f "%ChromeCache%\*.*">nul 2>&1    
+del /q /f "%ChromeDataDir%\*Cookies*.*">nul 2>&1    
+del /q /f "%ChromeDataDir%\*History*.*">nul 2>&1    
+
+
+set ChromeDataDir="C:\Users\%USERNAME%\Local Settings\Application Data\Google\Chrome\User Data\Default"
+set ChromeCache=%ChromeDataDir%\Cache>nul 2>&1
+del /q /s /f "%ChromeCache%\*.*">nul 2>&1   
+del /q /f "%ChromeDataDir%\*Cookies*.*">nul 2>&1    
+del /q /f "%ChromeDataDir%\*History*.*">nul 2>&1    
+ECHO **** Clearing Chrome cache DONE
+

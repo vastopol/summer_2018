@@ -15,11 +15,19 @@ PS
   * kiosk parameterized through and xml file
     (loop_kiosk_v2.ps1 & settings.xml )
 
+  * fancy kiosk
+    (msg_xml_cache.ps1 & settings.xml)
+
 VBS
   * kiosk pops up a message when closed
     (vb_test2.vbs)
 
 ----------------------------------------
+
+Note:
+There are 2 options whne setting a login script, one is for .bat & .vbs files and one is for .ps1 files.
+So far the .vbs and.bat files work fine for the login but the powershell ones dont always work right.
+
 
 currently we have establised multiple solutions for the kiosk application
 now the main focus is on 3 new things for scripts:

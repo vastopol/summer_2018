@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Settings>
+	<Main>
+      <PRGM>"chrome.exe"</PRGM>
+	  <URL>https://chassintranet.ucr.edu/saas2/advisor</URL>
+	  <KIOSK>True</KIOSK> 
+      <EKILL>True</EKILL> 
+	</Main>
+</Settings>

@@ -8,6 +8,7 @@ Some of the best general sites:
 * Microsoft TechNet
 * Windows Sysinternals
 * stackoverflow
+* serverfault
 
 =======================================
 
@@ -44,7 +45,7 @@ Some of the best general sites:
 
 * Automating Kiosk Mode in Windows
     https://execmgr.net/2018/02/16/kiosk-mode-in-windows-overcoming-the-issues/
-	
+
 =======================================
 
 sites that maybe has potential to work...
@@ -77,3 +78,25 @@ Group Policy
 * Automating Group Policy Management with Windows PowerShell
     https://technet.microsoft.com/en-us/library/2009.06.gpmanagement.aspx
 
+misc
+
+* Script for clearing Chrome or Firefox cache on Windows
+    https://stackoverflow.com/questions/25210330/script-for-clearing-chrome-or-firefox-cache-on-windows
+
+https://social.technet.microsoft.com/Forums/scriptcenter/en-US/c8689a32-e43a-4a41-b481-bd0b07d2904a/setting-a-local-policy-through-script?forum=ITCG
+
+https://github.com/dlwyatt/PolicyFileEditor
+
+https://davewyatt.wordpress.com/2015/03/31/manage-local-group-policy-objects-from-powershell-and-desired-state-configuration/
+
+http://brandonpadgett.com/powershell/Local-gpo-powershell/
+
+https://blogs.technet.microsoft.com/heyscriptingguy/2013/02/07/use-powershell-to-generate-and-parse-a-group-policy-object-report/
+
+https://docs.microsoft.com/en-us/powershell/module/grouppolicy/set-gpregistryvalue?view=win10-ps
+
+https://stackoverflow.com/questions/26471345/edit-a-gpo-with-a-script
+
+https://sid-500.com/2017/08/25/configuring-group-policies-by-using-windows-powershell/
+
+https://www.verboon.info/2010/10/creating-group-policy-objects-with-powershell/
