@@ -1,0 +1,19 @@
+Insecure Web Interface:
+
+Insufficient Authentication/Authorization:
+
+Insecure Network Services:
+
+Lack of Transport Encryption/Integrity Verification:
+
+Privacy Concerns:
+
+Insecure Cloud Interface:
+
+Insecure Mobile Interface:
+
+Insufficient Security Configurability:
+
+Insecure Software/Firmware:
+
+Poor Physical Security:

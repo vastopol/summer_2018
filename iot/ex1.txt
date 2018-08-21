@@ -1,0 +1,89 @@
+Example 1: Circle with Disney 
+
+https://blog.talosintelligence.com/2017/10/vulnerability-spotlight-circle.html
+
+Exploitable Vulnerability:
+  generation of authentication token functionality
+  firmware update functionality
+  api/CONFIG/backup functionality
+  torlist update functionality
+  servers update functionality
+  database update functionality
+  user photo update functionality
+  api/CONFIG/restore functionality
+  signature verification of the firmware update functionality
+  rclient SSL validation in the remote control functionality
+  goclient SSL validation in the remote control functionality
+  libbluecoat.so SSL validation in the remote control functionality
+  WiFi configuration functionality
+  notifications functionality
+  WiFi management
+  WiFi Access Point feature
+  WiFi Channel parsing
+
+Exploitable Denial of Service Vulnerability:
+  API daemon
+
+Exploitable Authentication Bypass vulnerability:
+  API daemon
+
+Exploitable Information Disclosure Vulnerability:
+  Apid daemon
+
+Backdoor Vulnerability:
+  remote control functionality
+
+Exploitable Routing Vulnerability:
+  cloud infrastructure
+
+How it was exploited:
+  Specially crafted network packets can cause a valid authentication token to be returned to the attacker resulting in authentication bypass. 
+  An attacker can send a series of packets to trigger this vulnerability.
+
+  Specially crafted network packets can cause the product to run an attacker-supplied shell script. 
+  An attacker can intercept and alter network traffic to trigger this vulnerability.
+
+  Specially crafted network packets can cause a os command injection. An attacker can send a http request trigger this vulnerability.
+
+  Specially crafted network packets can cause the device to overwrite sensitive files, resulting in code execution. 
+  An attacker needs to impersonate a remote server in order to trigger this vulnerability.
+
+  Specially crafted network packets can cause the device to execute arbitrary code. An attacker needs to impersonate a remote server in order to trigger this vulnerability.
+
+  A repeated set of specially crafted API calls can cause the device to corrupt essential memory, resulting in an effectively bricked device. 
+  An attacker needs network connectivity to the device to trigger this vulnerability.
+
+  A large amount of simultaneous TCP connections causes the APID daemon to repeatedly fork, causing the daemon to run out of memory and trigger a device reboot. 
+  An attacker needs network connectivity to the device to trigger this vulnerability.
+
+  Specially crafted network packets can cause an unsigned firmware to be installed in the device resulting in arbitrary code execution. 
+  An attacker can send a series of packets to trigger this vulnerability.
+
+  Certificates for specific domain names can cause the product to accept a different certificate than intended. 
+  An attacker can host an HTTPS server with this certificate to trigger this vulnerability.
+
+  SSL certificates for specific domain names can cause the product to accept a different certificate than intended. 
+  An attacker can host an HTTPS server with this certificate to trigger this vulnerability.
+
+  A specially crafted token can bypass the authentication routine of the Apid binary, causing the device to grant unintended administrative access. 
+  An attacker needs network connectivity to the device to trigger this vulnerability.
+
+  A specially crafted SSID can cause the device to execute limited length shell commands, resulting in code execution. 
+  An attacker needs to send a couple of HTTP requests and setup an access point reachable by the device to trigger this vulnerability.
+
+  Specially crafted network packets can cause an arbitrary file to be overwritten. An attacker can send an HTTP request trigger this vulnerability.
+
+  A specially crafted set of packet can make the Disney Circle dump strings from an internal database into an HTTP response. 
+  An attacker needs network connectivity to the Internet to trigger this vulnerability.
+
+  A specific set of network packets can remotely start an SSH server on the device, resulting in a persistent backdoor. An attacker send an API call to enable the SSH server.
+
+  A specially crafted packet can make the Circle cloud route a packet to any arbitrary Circle device. An attacker needs network connectivity to the Internet to trigger this vulnerability.
+
+  A specially crafted SSID can cause the device to execute limited length sed commands. An attacker needs to setup an access point reachable by the device to trigger this vulnerability.
+
+  A series of WiFi packets can force Circle to setup an Access Point with default credentials. An attacker needs to send a series of spoofed "de-auth" packets to trigger this vulnerability.
+
+  The Circle device will always connect to the configured Access Point SSID, even if the security option changes. 
+  An attacker needs to setup an Access Point reachable by the device and to send a series of spoofed "deauth" packets to trigger this vulnerability.
+
