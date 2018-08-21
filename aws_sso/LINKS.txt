@@ -1,0 +1,32 @@
+amazon web services
+single sign on application
+
+--------------------
+
+Single Sign On:
+
+https://aws.amazon.com/blogs/security/introducing-aws-single-sign-on/
+
+https://aws.amazon.com/single-sign-on/
+
+https://docs.aws.amazon.com/singlesignon/latest/userguide/getting-started.html
+
+https://docs.aws.amazon.com/singlesignon/latest/userguide/sso-ug.pdf
+
+https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ms_ad_single_sign_on.html
+
+
+Active Directory:
+
+https://aws.amazon.com/directoryservice/
+
+https://aws.amazon.com/directoryservice/getting-started/
+
+https://docs.aws.amazon.com/directoryservice/latest/admin-guide/what_is.html
+
+https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ms_ad_tutorial_setup_trust.html
+
+https://docs.aws.amazon.com/directoryservice/latest/admin-guide/directory_ad_connector.html
+
+
+

@@ -1,0 +1,68 @@
+Amazon Web Services Single Sign-On (AWS SSO)
+
+summary:
+
+AWS SSO provides a portal so users can find and access all of their assigned accounts and applications in one place, using their existing corporate credentials. 
+You can connect a Microsoft Active Directory to AWS SSO so that users can sign in to the portal with their user names and passwords to access the AWS accounts and applications they have access to.
+You can use AWS SSO to centrally assign, manage, and audit users access to multiple AWS accounts and SAML-enabled business applications. 
+You can add new users to the appropriate Active Directory group, which automatically gives them access to the AWS accounts and applications assigned for members of that group.
+AWS SSO records details such as the IP address, user name, date, and time of the sign-in request. Any changes made by administrators in the AWS SSO console also are recorded in CloudTrail,
+and you can use security information and event management (SIEM) solutions such as Splunk and Sumo Logic to analyze the associated CloudTrail logs.
+With AWS SSO, you can configure all the necessary user permissions to your AWS resources in your AWS accounts by applying permission sets, 
+which are collections of permissions that are based on a combination of AWS managed policies or AWS managed policies for job functions. 
+AWS managed policies are designed to provide permissions for many common use cases, and AWS managed policies for job functions are designed to closely align with common job functions in the IT industry
+
+sso concepts:
+  * SAML Federation
+		AWS SSO supports identity federation with Security Assertion Markup Language 2.0. 
+		SAML 2.0 is an industry standard used for securely exchanging SAML assertions that pass information about a user
+		between a SAML authority , and a SAML consumer. AWS SSO service uses this information to provide federated single sign-on
+		for users who are authorized to use applications within the AWS SSO user portal.
+  * User Authentications
+		When a user signs in to the user portal using their username, AWS SSO redirects the request to the AWS SSO authentication service
+		based on the domain associated with their email address. Once authenticated, users have SSO access to any of the AWS accounts 
+		and third-party software as a service applications that show up in the portal without additional sign-in prompts.
+  * Attribute Mappings
+		AWS SSO retrieves user attributes from your connected directory and maps them to AWS SSO user attributes.
+		These AWS SSO user attribute mappings are also used for generating SAML assertions for your cloud applications. 
+		Each cloud application determines the list of SAML attributes it needs for successful single sign-on. 
+		AWS SSO prefills a set of attributes for you under the Attribute mappings tab found on your application's configuration page
+  * Permission Sets
+		A permission set is a collection of administrator-defined policies that AWS SSO uses to determine a user's effective permissions to access a given AWS account. 
+		Permission sets can contain either AWS managed policies or custom policies that are stored in AWS SSO. 
+		Policies are essentially documents that act as containers for one or more permission statements,
+		which represent individual access controls for various tasks that determine what tasks users can or cannot perform within the AWS account.
+		Permission sets ultimately get created as IAM roles in a given AWS account, with trust policies that allow users to assume the role through AWS SSO.
+  * Service-Linked Roles
+		Service-linked roles are predefined IAM permissions that allow AWS SSO to delegate and enforce which users have SSO access to specific AWS accounts in your AWS organization. 
+		The service enables this functionality by provisioning a service-linked role in every AWS account within its organization. 
+		The service then allows other AWS services like AWS SSO to leverage those roles to perform service-related tasks.
+
+prerequisites:
+  * You must have first set up the AWS Organizations service and have All features set to enabled.
+  * You must sign-in with the AWS Organizations master account credentials before you begin setting up AWS SSO
+  * You must have an existing Microsoft Active Directory (AD) set up in AWS Directory Service and it must reside within your organization's master account.
+  * Your connected directory must be in the US East (N. Virginia) (us-east-1) Region where AWS SSO is also available. To administer AWS SSO, you must be in the us-east-1 region.
+
+AWS account sign up:
+  * email 
+  * name 
+  * address
+  * phone - they call you
+  * credit card
+
+3 use cases:
+   * Manage SSO access to AWS accounts
+       With AWS SSO, you can grant your users access to AWS accounts in your organization. You can do this by adding your users to groups in your corporate Active Directory. 
+	   In AWS SSO, specify which Active Directory groups can access which AWS accounts, and then pick a permission set to specify the level of SSO access you are granting these Active Directory groups. 
+	   AWS SSO then sets up AWS account access for the users in the groups. Going forward, you can add new users to your Active Directory groups, and AWS SSO automatically provides the users access to the configured accounts. 
+	   You also can grant Active Directory users direct access to AWS accounts (without needing to add users to Active Directory groups).
+   * Manage SSO access to business applications
+       AWS SSO has built-in support for SSO access to commonly used business applications such as Salesforce, Office 365, and Box. 
+	   You can find these applications in the AWS SSO console and easily configure SSO access by using the application configuration wizard. 
+	   After you configure an application for SSO access, you can grant users access by searching for users and groups in your corporate directory.
+   * Manage SSO access to custom SAML-enabled applications
+       You also can enable SSO access to your custom-built or partner-built SAML applications by using the AWS SSO application configuration wizard.
+	   
+	   
+	   
