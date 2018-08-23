@@ -7,7 +7,7 @@ Attacker uses weak credentials, captures plain-text credentials or enumerates ac
 An insecure web interface can be present when issues such as account enumeration, lack of account lockout or weak credenitals are present. 
 Insecure web interfaces are prevalent as the intent is to have these interfaces exposed only on internal networks, however threats from the internal users can be just as significant as threats from external users
 
-Issues with the web interface are easy to discover when examining the interface manually along with automated testing tools to identify other issues such as cross-site scripting.	
+Issues with the web interface are easy to discover when examining the interface manually along with automated testing tools to identify other issues such as cross-site scripting.  
 
 ----------------------------------------
 

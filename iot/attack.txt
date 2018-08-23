@@ -15,27 +15,27 @@ Attacks:
 
 Network Packet Based Attacks
   Specially crafted network packets can cause
-	an os command injection
-	the device to execute arbitrary code
-	the product to run an attacker supplied shell script
-	the device to overwrite sensitive files - arbitrary code execution
-	unsigned firmware to be installed in the device - arbitrary code execution.
-	the product to dump strings from an internal database into an HTTP response
+    an os command injection
+    the device to execute arbitrary code
+    the product to run an attacker supplied shell script
+    the device to overwrite sensitive files - arbitrary code execution
+    unsigned firmware to be installed in the device - arbitrary code execution.
+    the product to dump strings from an internal database into an HTTP response
     a remotely started SSH server on the device - persistent backdoor
     a valid authentication token to be returned to the attacker - authentication bypass
   To accomplish this an attacker might choose to
     send a series of packets
-	intercept and alter network traffic
-	send an HTTP request
-	impersonate a remote server
-	gain network connectivity to the Internet
-	send an API call to enable the SSH server
+    intercept and alter network traffic
+    send an HTTP request
+    impersonate a remote server
+    gain network connectivity to the Internet
+    send an API call to enable the SSH server
   To stop this you can
     protect a zone by checking packet parameter headers
-	Dropping packets with undesirable characteristics
-	Stripping undesirable options from packets before admitting them to the zone
-	drop malformed IP packets, TCP SYN and SYN-ACK packets that contain data, fragmented ICMP packets, etc...
-	
+    Dropping packets with undesirable characteristics
+    Stripping undesirable options from packets before admitting them to the zone
+    drop malformed IP packets, TCP SYN and SYN-ACK packets that contain data, fragmented ICMP packets, etc...
+    
 ----------------------------------------
 
 Targets:
