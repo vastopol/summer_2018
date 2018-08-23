@@ -1,0 +1,72 @@
+Specifics:
+
+these exploit a vulnerability by attacking a specific weak point in a system
+similar attacks can be used to exploit different vulnerabilities in a system
+a surface may have multiple vulnerabilities which can be exploited
+
+These vulnerabilities vary in the level of access required by an attacker to exploit them and the level of access they give an attacker. 
+In isolation, some of these might be hard to exploit, but together they can be combined into a significant attack on the device.
+It is possible to gather the set of preconditions needed to exploit bugs that would otherwise be unreachable by using multiple vulnerabilities. 
+This is commonly referred to as "chaining."
+
+----------------------------------------
+
+Attacks:
+
+Network Packet Based Attacks
+  Specially crafted network packets can cause
+	an os command injection
+	the device to execute arbitrary code
+	the product to run an attacker supplied shell script
+	the device to overwrite sensitive files - arbitrary code execution
+	unsigned firmware to be installed in the device - arbitrary code execution.
+	the product to dump strings from an internal database into an HTTP response
+    a remotely started SSH server on the device - persistent backdoor
+    a valid authentication token to be returned to the attacker - authentication bypass
+  To accomplish this an attacker might choose to
+    send a series of packets
+	intercept and alter network traffic
+	send an HTTP request
+	impersonate a remote server
+	gain network connectivity to the Internet
+	send an API call to enable the SSH server
+  To stop this you can
+    protect a zone by checking packet parameter headers
+	Dropping packets with undesirable characteristics
+	Stripping undesirable options from packets before admitting them to the zone
+	drop malformed IP packets, TCP SYN and SYN-ACK packets that contain data, fragmented ICMP packets, etc...
+	
+----------------------------------------
+
+Targets:
+
+(coffee maker)
+
+When a connected coffee machine is turned on it opens a non-encrypted hotspot and listens to UPNP traffic. 
+On the client side, the smartphone running the mobile app provided by the vendor of the coffee machines connects to the hotspot and sends a broadcast UDP request searching for UPNP devices. 
+The Coffee machine establish the communication with the app exchanging several data including the SSID and the password to the home wireless network, unfortunately they are in clear text.
+a device, it responds to this request. After that a short communication containing the SSID and the password to the home wireless network, among other things, is sent from the smartphone to the device.
+“This is where we detected a problem. Although the password is sent in encrypted form, the components of the encryption key are sent through an open, non-protected channel. 
+
+(hub)
+
+The SmartThings Hub is a central controller that monitors and manages various internet-of-things (IoT) devices such as smart plugs, LED light bulbs, thermostats, cameras, and more that would 
+typically be deployed in a smart home. The SmartThings Hub functions as a centralized controller for these devices and allows users to remotely connect to and manage these devices using a smartphone. 
+The firmware running on the SmartThings Hub is Linux-based and allows for communications with IoT devices using a variety of different technologies such as Ethernet, Zigbee, Z-Wave and Bluetooth. 
+
+(gateways)
+
+To share the sensor data they collect, IoT devices connect to an IoT gateway or another edge device where data can either be analyzed locally or sent to the cloud.
+A gateway provides a place to preprocess that data locally at the edge before sending it on to the cloud.
+All data moving to the cloud, or vice versa, goes through the gateway, which can be either a dedicated hardware appliance or software program.
+
+Gateway data-collection points could be especially targeted, with a successful penetration enabling modification of data and control streams over whole sectors of edge devices
+certain kinds of attacks would attempt to edit, insert or delete the data streams collected from edge devices. 
+The point may not be to corrupt or destroy the data from any particular device, but to help perpetrate some other kind of fraud by modifying it
+
+(common)
+
+Vulnerabilities common among IoT devices include unprotected USB ports, lack of digitally signed software updates and unencrypted storage of passwords for users' home Wi-Fi networks. 
+Many devices come with default administrative passwords, but without warnings that users need to change those passwords. Other devices have hard-coded administrative passwords that can't be changed.
+
+

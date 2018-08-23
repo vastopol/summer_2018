@@ -1,13 +1,20 @@
 IoT security and vulnerability analysis
 
-IoT Search Engine:
+High level summary of IoT Security landscape and current threats.
+The other documentation will have more detailed information on specific topics
+
+----------------------------------------
+
+Resources:
   https://www.shodan.io/
+  https://www.talosintelligence.com/
+  https://www.owasp.org/index.php/OWASP_Internet_of_Things_Project
 
 Articles:
-  https://www.owasp.org/index.php/OWASP_Internet_of_Things_Project
-  https://www.owasp.org/index.php/Top_IoT_Vulnerabilities
-  https://www.owasp.org/index.php/IoT_Attack_Surface_Areas
   https://www.ic3.gov/media/2015/150910.aspx
+  https://blog.talosintelligence.com/2017/06/the-internet-of-vulnerable-things.html
+  https://www.pentestpartners.com/security-blog/the-most-common-iot-device-security-failings-of-2017/
+  https://www.researchgate.net/publication/304408245_Internet_of_Things_Security_vulnerabilities_and_challenges
 
 The OWASP Top 10 IoT Vulnerabilities:
   Insecure Web Interface
@@ -38,22 +45,28 @@ The OWASP IoT Attack Surface Areas:
   Ecosystem Communication
   Network Traffic
 
-Communication Protocols:
-  WiFi
-  Bluetooth
-  Ethernet
+Information Transmission Methods:
+  Communication Protocol
+    CoAP, DTLS, MQTT
+  Wireless Protocol
+    IPv6, Bluetooth Low Energy, RFID, NFC, LPWAN, Zigbee, Z-Wave
+  Other Protocol
+    WiFi, Cellular, Ethernet, Satellite
   
 Targets:
   consumer, enterprise, and industrial smart devices
-  wireless-enabled home appliances
   devices controlled through smartphone/mobile app
-
+  wireless-enabled home appliances
+  driverless cars
+  implanted medical devices
+  
 Vulnerability Types:
   Denial of Service
   authentication bypass
   information disclosure
   backdoor
   rerouting
+  hijacking
 
 Attack Vectors:
   generation of authentication token
@@ -67,46 +80,48 @@ Attack Vectors:
   cloud infrastructure
 
 ----------------------------------------
-  
-Attack Specifics:
 
-Network Packet Based Attacks
-  Specially crafted network packets can cause
-	an os command injection
-	the device to execute arbitrary code
-	the product to run an attacker supplied shell script
-	the device to overwrite sensitive files - arbitrary code execution
-	unsigned firmware to be installed in the device - arbitrary code execution.
-	the product to dump strings from an internal database into an HTTP response
-    a remotely started SSH server on the device - persistent backdoor
-    a valid authentication token to be returned to the attacker - authentication bypass
-  To accomplish this an attacker might choose to
-    send a series of packets
-	intercept and alter network traffic
-	send an HTTP request
-	impersonate a remote server
-	gain network connectivity to the Internet
-	send an API call to enable the SSH server
-	
+Threats to users:
+
+Privacy
+  rigorously anonymized data can sometimes be de-anonymized when there are other overlapping data sets available. 
+  an increasing number of connected IoT devices surround us generating contextual data streams, expectation of privacy really is in danger.
+
+Data Espionage
+  spying on IoT data streams directly, or at a higher level discovering control schemes, underlying architectures and deployments
+  exploit metadata to deduce operating policies, internal groupings and key sets of "things," identifying events, and other intelligence without necessarily needing to break data-level encryption.
+
+denial-of-service
+  can flood communications, reroute protocols, block data streams, overwhelm gateways, insert undue network latencies and even physically damage devices
+
+Corrupting data integrity
+  attempt to edit, insert or delete the data streams collected from edge devices, connected things could be first physically compromised and then used to feed back fraudulent data.
+
+Hijacking devices
+  IoT botnets, actual theft, control of devices, or the more subtle borrowing of an IoT segment to conduct some kind of harassment, demand ransom or possibly even commit violent physical acts
+
 ----------------------------------------
 
-Target Specifics:
+Suggested IoT Security:
 
-(coffee maker)
+Securing IoT devices and the networks they connect to can be challenging due to the variety of devices and vendors, and the difficulty of adding security to resource-constrained devices.
+There are many protocols, network architectures, heterogeneous hardware or non-upgradeable vendor-controlled systems, not all of which are compatible.
 
-When a connected coffee machine is turned on it opens a non-encrypted hotspot and listens to UPNP traffic. 
-On the client side, the smartphone running the mobile app provided by the vendor of the coffee machines connects to the hotspot and sends a broadcast UDP request searching for UPNP devices. 
-The Coffee machine establish the communication with the app exchanging several data including the SSID and the password to the home wireless network, unfortunately they are in clear text.
- a device, it responds to this request. After that a short communication containing the SSID and the password to the home wireless network, among other things, is sent from the smartphone to the device.
-“This is where we detected a problem. Although the password is sent in encrypted form, the components of the encryption key are sent through an open, non-protected channel. 
+successful deployment of an IoT system should include an integrated way to monitor and remotely manage internet-enabled devices.
+The emphasis on security should not interfere with performance, interoperability, power/processing capabilities, scalability and availability. 
+This can be done either by adopting standard protocols or using services offered by a vendor for device management purposes.
 
-(hub)
+Device Management
+  registration, authentication, authorization, configuration, provisioning, monitoring, diagnostics, troubleshooting
 
-The SmartThings Hub is a central controller that monitors and manages various internet-of-things (IoT) devices such as smart plugs, LED light bulbs, thermostats, cameras, and more that would 
-typically be deployed in a smart home. The SmartThings Hub functions as a centralized controller for these devices and allows users to remotely connect to and manage these devices using a smartphone. 
-The firmware running on the SmartThings Hub is Linux-based and allows for communications with IoT devices using a variety of different technologies such as Ethernet, Zigbee, Z-Wave and Bluetooth. 
+Device Security
+  Strong passwords, authentication, authorization, identity management, network segmentation, encryption, cryptography
 
-(common)
-
-Vulnerabilities common among IoT devices include unprotected USB ports, lack of digitally signed software updates and unencrypted storage of passwords for users' home Wi-Fi networks. 
-Many devices come with default administrative passwords, but without warnings that users need to change those passwords. Other devices have hard-coded administrative passwords that can't be changed.
+Hardening the devices
+  patch/update devices to the most recent fix
+  remove unneeded services/applications
+  close any ports that dont need to be open
+  make the device hard to find ( can't look up on shodan )
+ 
+  
+  
