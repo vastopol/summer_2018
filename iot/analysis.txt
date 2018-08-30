@@ -1,22 +1,11 @@
 IoT security and vulnerability analysis
 
-High level summary of IoT Security landscape and current threats.
-The other documentation will have more detailed information on specific topics
+High level summary of the IoT Security landscape and current threats.
+The other documentation has more detailed information on specific topics
 
 ----------------------------------------
 
-Resources:
-  https://www.shodan.io/
-  https://www.talosintelligence.com/
-  https://www.owasp.org/index.php/OWASP_Internet_of_Things_Project
-
-Articles:
-  https://www.ic3.gov/media/2015/150910.aspx
-  https://blog.talosintelligence.com/2017/06/the-internet-of-vulnerable-things.html
-  https://www.pentestpartners.com/security-blog/the-most-common-iot-device-security-failings-of-2017/
-  https://www.researchgate.net/publication/304408245_Internet_of_Things_Security_vulnerabilities_and_challenges
-
-The OWASP Top 10 IoT Vulnerabilities:
+The OWASP Top IoT Vulnerabilities:
   Insecure Web Interface
   Insufficient Authentication/Authorization
   Insecure Network Services
@@ -46,11 +35,11 @@ The OWASP IoT Attack Surface Areas:
   Network Traffic
 
 Information Transmission Methods:
-  Communication Protocol
+  Communication Protocols
     CoAP, DTLS, MQTT
-  Wireless Protocol
+  Wireless Protocols
     IPv6, Bluetooth Low Energy, RFID, NFC, LPWAN, Zigbee, Z-Wave
-  Other Protocol
+  Other Protocols
     WiFi, Cellular, Ethernet, Satellite
   
 Targets:
@@ -74,7 +63,7 @@ Attack Vectors:
   configuration/backup/restore
   signature verification
   SSL validation
-  WiFI configuration/access/management
+  WiFi configuration/access/management
   daemons
   remote access and control
   cloud infrastructure
@@ -85,14 +74,14 @@ Threats to users:
 
 Privacy
   rigorously anonymized data can sometimes be de-anonymized when there are other overlapping data sets available. 
-  an increasing number of connected IoT devices surround us generating contextual data streams, expectation of privacy really is in danger.
+  an increasing number of connected IoT devices surround us generating contextual data streams, expectation of privacy is in danger.
 
 Data Espionage
   spying on IoT data streams directly, or at a higher level discovering control schemes, underlying architectures and deployments
   exploit metadata to deduce operating policies, internal groupings and key sets of "things," identifying events, and other intelligence without necessarily needing to break data-level encryption.
 
 denial-of-service
-  can flood communications, reroute protocols, block data streams, overwhelm gateways, insert undue network latencies and even physically damage devices
+  flood communications, reroute protocols, block data streams, overwhelm gateways, insert undue network latencies and even physically damage devices
 
 Corrupting data integrity
   attempt to edit, insert or delete the data streams collected from edge devices, connected things could be first physically compromised and then used to feed back fraudulent data.
@@ -117,7 +106,7 @@ Device Management
 Device Security
   Strong passwords, authentication, authorization, identity management, network segmentation, encryption, cryptography
 
-Hardening the devices
+Hardening the Devices
   patch/update devices to the most recent fix
   remove unneeded services/applications
   close any ports that dont need to be open

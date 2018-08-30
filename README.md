@@ -1,9 +1,7 @@
 # summer18
 
-windows security project: secure kiosks
+6/25/18 - 8/31/18
 
-* week 1 : 6/25/18 - 6/29/18 
-* week 2 : 7/2/18  - 7/6/18
-* week 3 : 7/9/18  - 7/13/18
-* week 4 : 7/16/18 - 7/20/18
-* week 5 : 7/23/18 - 7/27/18
+* Secure Internet Kiosk
+* AWS SSO
+* IoT Security

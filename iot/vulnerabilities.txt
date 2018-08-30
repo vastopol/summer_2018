@@ -1,30 +1,383 @@
-Insecure Web Interface:
+OWASP IoT Vulnerabilities
 
-commonly found, easy to detect, easy to exploit
+https://www.owasp.org/index.php/Top_IoT_Vulnerabilities
+https://www.slideshare.net/bishopfox/owasp-internet-of-things-iot-top-10-vulnerabilities-list
+https://www.rsaconference.com/writable/presentations/file_upload/asd-t10-securing-the-internet-of-things-mapping-iot-attack-surface-areas-with-the-owasp-iot-top-10-project.pdf
 
-Attacker uses weak credentials, captures plain-text credentials or enumerates accounts to access the web interface. Attack could come from external or internal users.
-
-An insecure web interface can be present when issues such as account enumeration, lack of account lockout or weak credenitals are present. 
-Insecure web interfaces are prevalent as the intent is to have these interfaces exposed only on internal networks, however threats from the internal users can be just as significant as threats from external users
-
-Issues with the web interface are easy to discover when examining the interface manually along with automated testing tools to identify other issues such as cross-site scripting.  
+in 2017 OWASP changed the ranking system for exploitability, detectability, prevelance and impact to numerical based system.
 
 ----------------------------------------
 
-Insufficient Authentication/Authorization:
+Insecure Web Interface
 
-Insecure Network Services:
+common prevalence, easy to detect, easy to exploit, severe impact
 
-Lack of Transport Encryption/Integrity Verification:
+Agent:
+  Consider anyone who has access to the web interface including internal and external users.
+  
+Vector:
+  Attacker uses weak credentials, captures plain-text credentials or enumerates accounts to access the web interface. Attack could come from external or internal users.
 
-Privacy Concerns:
+Security Weaknesses:
+  An insecure web interface can be present when issues such as account enumeration, lack of account lockout or weak credenitals are present.
+  Insecure web interfaces are prevalent as the intent is to have these interfaces exposed only on internal networks, however threats from the internal users can be just as significant as threats from external users
+  Issues with the web interface are easy to discover when examining the interface manually along with automated testing tools to identify other issues such as cross-site scripting.
 
-Insecure Cloud Interface:
+Impact:
+  Insecure web interfaces can result in data loss or corruption, lack of accountability, or denial of access and can lead to complete device takeover.
+  
+Checking for an Insecure Web Interface includes:
+  Determining if the default username and password can be changed during initial product setup
+  Determining if a specific user account is locked out after 3 - 5 failed login attempts
+  Determining if valid accounts can be identified using password recovery mechanisms or new user pages
+  Reviewing the interface for issues such as cross-site scripting, cross-site request forgery and sql injection.
 
-Insecure Mobile Interface:
+A secure web interface requires:
+  Default passwords and ideally default usernames to be changed during initial setup
+  Ensuring password recovery mechanisms are robust and do not supply an attacker with information indicating a valid account
+  Ensuring web interface is not susceptible to XSS, SQLi or CSRF
+  Ensuring credentials are not exposed in internal or external network traffic
+  Ensuring weak passwords are not allowed
+  Ensuring account lockout after 3 -5 failed login attempts
 
-Insufficient Security Configurability:
+----------------------------------------
 
-Insecure Software/Firmware:
+Insufficient Authentication/Authorization
 
-Poor Physical Security:
+common prevalence, easy to detect, average to exploit, severe impact
+
+Agent:
+  Consider anyone who has access to the web interface, mobile interface or cloud interface including internal and external users.
+
+Vector:
+  Attacker uses weak passwords, insecure password recovery mechanisms, poorly protected credentials or lack of granular access control to access a particular interface. 
+  Attack could come from external or internal users.
+
+Security Weaknesses:
+  Authentication may not be sufficient when weak passwords are used or are poorly protected. Deficiencies are often found to be present across all interfaces. 
+  Insufficient authentication/authorization is prevalent as it is assumed that interfaces will only be exposed to users on internal networks and not to external users on other networks. 
+  Many Issues with authentication/authorization are easy to discover when examining the interface manually and can also be discovered via automated testing.
+
+Impact:
+  Insufficient authentication/authorization can result in data loss or corruption, lack of accountability, or denial of access and can lead to complete compromise of the device and/or user accounts.
+
+Checking for Insufficient Authentication includes:
+  Attempting to use simple passwords such as "1234" is a fast and easy way to determine if the password policy is sufficient across all interfaces
+  Reviewing network traffic to determine if credentials are being transmitted in clear text
+  Reviewing requirements around password controls such as password complexity, password history check, password expiration and forced password reset for new users
+  Reviewing whether re-authentication is required for sensitive features
+
+Checking for Insufficient Authorization includes:
+  Reviewing the various interfaces to determine whether the interfaces allow for separation of roles. 
+  For example, all features will be accessible to administrators, but users will have a more limited set of features available.
+  Reviewing access controls and testing for privilege escalation
+
+Sufficient authentication/authorization requires:
+  Ensuring that strong passwords are required
+  Ensuring granular access control is in place when necessary
+  Ensuring credentials are properly protected
+  Implement two factor authentication where possible
+  Ensuring that password recovery mechanisms are secure
+  Ensuring re-authentication is required for sensitive features
+  Ensuring options are available for configuring password controls
+  Ensuring credential can be revoked
+  The app authentication is required
+  The device authentication is required
+  The server authentication is required
+  Manage authenicated user id(credential info.) and the user's device id, the user's app id mapping table in the authentication server
+  Ensuring that the authentication token/session key issuing to client is always different
+  Ensuring that the user id, app id, device id is universally unique
+
+----------------------------------------
+
+Insecure Network Services
+
+uncommon prevalence, average to detect, average to exploit, moderate impact
+
+Agent:
+  Consider anyone who has access to the device via a network connection, including external and internal users.
+
+Vector:
+  Attacker uses vulnerable network services to attack the device itself or bounce attacks off the device. Attack could come from external or internal users.
+
+Security Weaknesses:
+  Insecure network services may be susceptible to buffer overflow attacks or attacks that create a denial of service condition leaving the device inaccessible to the user. 
+  Denial of service attacks against other users may also be facilitated when insecure network services are available. Insecure network services can often be detected by 
+  automated tools such as port scanners and fuzzers.
+
+Impact:
+  Insecure network services can result in data loss or corruption, denial of service or facilitation of attacks on other devices.
+
+Checking for Insecure Network Services includes:
+  Determining if insecure network services exist by reviewing your device for open ports using a port scanner
+  As open ports are identified, each can be tested using any number of automated tools that look for DoS vulnerabilities, vulnerabilities related to UDP services and vulnerabilities
+  related to buffer overflow and fuzzing attacks. Reviewing network ports to ensure they are absolutely necessary and if there are any ports being exposed to the internet using UPnP.
+
+Securing network services requires:
+  Ensuring only necessary ports are exposed and available.
+  Ensuring services are not vulnerable to buffer overflow and fuzzing attacks.
+  Ensuring services are not vulnerable to DoS attacks which can affect the device itself or other devices and/or users on the local network or other networks.
+  Ensuring network ports or services are not exposed to the internet via UPnP for example
+  The abnormal service request traffic should be detected and blocked on service gateway layer
+
+----------------------------------------
+
+Lack of Transport Encryption/Integrity Verification
+
+common prevalence, easy to detect, average to exploit, severe impact
+
+Agent:
+  Consider anyone who has access to the network the device is connected to, including external and internal users.
+
+Vector:
+  Attacker uses the lack of transport encryption to view data being passed over the network. Attack could come from external or internal users.
+
+Security Weaknesses:
+  Lack of transport encryption allows data to be viewed as it travels over local networks or the internet. 
+  Lack of transport encryption is prevalent on local networks as it is easy to assume that local network traffic will not be widely visible, however in the case of a local wireless network,
+  misconfiguration of that wireless network can make traffic visible to anyone within range of that wireless network. 
+  Many Issues with transport encryption are easy to discover simply by viewing network traffic and searching for readable data. 
+  Automated tools can also look for proper implementation of common transport encryption such as SSL and TLS.
+
+Impact:
+  Lack of transport encryption can result in data loss and depending on the data exposed, could lead to complete compromise of the device or user accounts.
+
+Checking for Lack of Transport Encryption includes:
+  Reviewing network traffic of the device, its mobile application and any cloud connections to determine if any information is passed in clear text
+  Reviewing the use of SSL or TLS to ensure it is up to date and properly implemented
+  Reviewing the use of any encryption protocols to ensure they are recommended and accepted
+
+Sufficient transport encryption requires:
+  Ensuring data is encrypted using protocols such as SSL and TLS while transiting networks.
+  Ensuring other industry standard encryption techniques are utilized to protect data during transport if SSL or TLS are not available.
+  Ensuring only accepted encryption standards are used and avoid using proprietary encryption protocols
+  Ensuring the message payload encryption
+  Ensuring the secure encryption key handshaking
+  Ensuring received data integrity verification
+
+----------------------------------------
+
+Privacy Concerns
+
+common prevalence, easy to detect, average to exploit, severe impact
+
+Agent:
+  Consider anyone who has access to the device itself, the network the device is connected to, the mobile application and the cloud connection including external and internal users.
+
+Vector:
+  Attacker uses multiple vectors such as insufficient authentication, lack of transport encryption or insecure network services to view personal data which is not being properly protected,
+  or is being collected unnecessarily. Attack could come from external or internal users.
+
+Security Weaknesses:
+  Privacy concerns generated by the collection of personal data in addition to the lack of proper protection of that data is prevalent. 
+  Privacy concerns are easy to discover by simply reviewing the data that is being collected as the user sets up and activates the device. 
+  Automated tools can also look for specific patterns of data that may indicate collection of personal data or other sensitive data.
+
+Impact:
+  Collection of personal data along with a lack of protection of that data can lead to compromise of a user's personal data.
+
+Checking for Privacy Concerns includes:
+  Identifying all data types that are being collected by the device, its mobile application and any cloud interfaces
+  The device and it's various components should only collect what is necessary to perform its function
+  Personally identifiable information can be exposed when not properly encrypted while at rest on storage mediums and during transit over networks
+  Reviewing who has access to personal information that is collected
+  Determining if data collected can be de-identified or anonymized
+  Determining if data collected is beyond what is needed for proper operation of the device (Does the end-user have a choice for this data collection?)
+  Determining if a data retention policy is in place
+
+Minimizing privacy concerns requires:
+  Ensuring only data critical to the functionality of the device is collected
+  Ensuring that any data collected is of a less sensitive nature (i.e., try not to collect sensitive data)
+  Ensuring that any data collected is de-identified or anonymized
+  Ensuring any data collected is properly protected with encryption
+  Ensuring the device and all of its components properly protect personal information
+  Ensuring only authorized individuals have access to collected personal information
+  Ensuring that retention limits are set for collected data
+  Ensuring that end-users are provided with "Notice and Choice" if data collected is more than what would be expected from the product
+  Ensuring the role based access control/authorization to the collected data/analyzed data is applied
+  Ensuring that the analyzed data is de-identified
+
+----------------------------------------
+
+Insecure Cloud Interface
+
+common prevalence, easy to detect, average to exploit, severe impact
+
+Agent:
+  Consider anyone who has access to the internet.
+
+Vector:
+  Attacker uses multiple vectors such as insufficient authentication, lack of transport encryption and account enumeration to access data or controls via the cloud website. 
+  Attack will most likely come from the internet.
+
+Security Weaknesses:
+  An insecure cloud interface is present when easy to guess credentials are used or account enumeration is possible. Insecure cloud interfaces are easy to discover by simply
+  reviewing the connection to the cloud interface and identifying if SSL is in use or by using the password reset mechanism to identify valid accounts which can lead to account enumeration.
+
+Impact:
+  An insecure cloud interface could lead to compromise of user data and control over the device.
+
+Checking for a Insecure Cloud Interface includes:
+  Determining if the default username and password can be changed during initial product setup
+  Determining if a specific user account is locked out after 3 - 5 failed login attempts
+  Determining if valid accounts can be identified using password recovery mechanisms or new user pages
+  Reviewing the interface for issues such as cross-site scripting, cross-site request forgery and sql injection.
+  Reviewing all cloud interfaces for vulnerabilities (API interfaces and cloud-based web interfaces)
+
+A secure cloud interface requires:
+  Default passwords and ideally default usernames to be changed during initial setup
+  Ensuring user accounts can not be enumerated using functionality such as password reset mechanisms
+  Ensuring account lockout after 3- 5 failed login attempts
+  Ensuring the cloud-based web interface is not susceptible to XSS, SQLi or CSRF
+  Ensuring credentials are not exposed over the internet
+  Implement two factor authentication if possible
+  Detect or block the abnormal reqests/attempts
+  
+----------------------------------------
+
+Insecure Mobile Interface
+
+common prevalence, easy to detect, average to exploit, severe impact
+
+Agent:
+  Consider anyone who has access to the mobile application.
+
+Vector:
+  Attacker uses multiple vectors such as insufficient authentication, lack of transport encryption and account enumeration to access data or controls via the mobile interface.
+
+Security Weaknesses:
+  An insecure mobile interface is present when easy to guess credentials are used or account enumeration is possible. Insecure mobile interfaces are easy to discover by simply 
+  reviewing the connection to the wireless networks and identifying if SSL is in use or by using the password reset mechanism to identify valid accounts which can lead to account enumeration.
+
+Impact:
+  An insecure mobile interface could lead to compromise of user data and control over the device.
+
+Checking for an Insecure Mobile Interface includes:
+  Determining if the default username and password can be changed during initial product setup
+  Determining if a specific user account is locked out after 3 - 5 failed login attempts
+  Determining if valid accounts can be identified using password recovery mechanisms or new user pages
+  Reviewing whether credentials are exposed while connected to wireless networks
+  Reviewing whether two factor authentication options are available
+
+A secure mobile interface requires:
+  Default passwords and ideally default usernames to be changed during initial setup
+  Ensuring user accounts can not be enumerated using functionality such as password reset mechanisms
+  Ensuring account lockout after an 3 - 5 failed login attempts
+  Ensuring credentials are not exposed while connected to wireless networks
+  Implementing two factor authentication if possible
+  Apply mobile app obfuscation techinque
+  Implement mbile app anti-tempering mechanism
+  Ensuring the mobile app's memory hacking is possible
+  Restric the mobile app's execution on tempered OS environment
+
+----------------------------------------
+
+Insufficient Security Configurability
+
+common prevalence, easy to detect, average to exploit, moderate impact
+
+Agent:
+  Consider anyone who has access to the device.
+  
+Vector:
+  Attacker uses the lack of granular permissions to access data or controls on the device. The attacker could also us the lack of encryption options and lack of password options 
+  to perform other attacks which lead to compromise of the device and/or data. Attack could potentially come from any user of the device whether intentional or accidental.
+
+Security Weaknesses:
+  Insufficient security configurability is present when users of the device have limited or no ability to alter its security controls. Insufficient security configurability is 
+  apparent when the web interface of the device has no options for creating granular user permissions or for example, forcing the use of strong passwords. Manual review of the 
+  web interface and its available options will reveal these deficiencies.
+
+Impact:
+  Insufficient security configurability could lead to compromise of the device whether intentional or accidental and/or data loss.
+
+Checking for Insufficient Security Configurability includes:
+  Reviewing the administrative interface of the device for options to strengthen security such as forcing the creation of strong passwords
+  Reviewing the administrative interface for the ability to separate admin users from normal users
+  Reviewing the administrative interface for encryption options
+  Reviewing the administrative interface for options to enable secure logging of various security events
+  Reviewing the administrative interface for options to enable alerts and notifications to the end user for security events
+
+Sufficient security configurability requires:
+  Ensuring the ability to separate normal users from administrative users
+  Ensuring the ability to encrypt data at rest or in transit
+  Ensuring the ability to force strong password policies
+  Ensuring the ability to enable logging of security events
+  Ensuring the ability to notify end users of security events
+
+----------------------------------------
+
+Insecure Software/Firmware
+
+common prevalence, easy to detect, difficult to exploit, severe impact
+
+Agent:
+  Consider anyone who has access to the device and/or the network the device resides on. Also consider anyone who could gain access to the update server.
+
+Vector:
+  Attacker uses multiple vectors such as capturing update files via unencrypted connections, the update file itself is not encrypted or they are able to perform 
+  their own malicious update via DNS hijacking. Depending on method of update and device configuration, attack could come from the local network or the internet.
+
+Security Weaknesses:
+  The lack of ability for a device to be updated presents a security weakness on its own. Devices should have the ability to be updated when vulnerabilities are discovered 
+  and software/firmware updates can be insecure when the updated files themselves and the network connection they are delivered on are not protected. Software/Firmware can also 
+  be insecure if they contain hardcoded sensitive data such as credentials. Security issues with software/firmware are relatively easy to discover by simply inspecting the network
+  traffic during the update to check for encryption or using a hex editor to inspect the update file itself for interesting information.
+
+Impact:
+  Insecure software/firmware could lead to compromise of user data, control over the device and attacks against other devices.
+
+Note - It is very important that devices first and foremost have the ability to update and perform updates regularly.
+
+Checking for insecure software/firmware updates include:
+  Reviewing the update file itself for exposure of sensitive information in human readable format by someone using a hex edit tool
+  Reviewing the production file update for proper encryption using accepted algorithms
+  Reviewing the production file update to ensure it is properly signed
+  Reviewing the communication method used to transmit the update
+  Reviewing the cloud update server to ensure transport encryption methods are up to date and properly configured and that the server itself is not vulnerable
+  Reviewing the device for proper validation of signed update files
+
+Securing software/firmware require:
+  Ensuring the device has the ability to update (very important, need secure update mechanism)
+  Ensuring the update file is encrypted using accepted encryption methods
+  Ensuring the update file is transmitted via an encrypted connection
+  Ensuring the update file does not expose sensitive data
+  Ensuring the update is signed and verified before allowing the update to be uploaded and applied
+  Ensuring the update server is secure
+  Implement the secure boot if possible (chain of trust)
+
+----------------------------------------
+
+Poor Physical Security
+
+common prevalence, average to detect, average to exploit, severe impact
+
+Agent:
+  Consider anyone who has physical access to the device.
+
+Vector:
+  Attacker uses vectors such as USB ports, SD cards or other storage means to access the Operating System and potentially any data stored on the device.
+
+Security Weaknesses:
+  Physical security weaknesses are present when an attacker can disassemble a device to easily access the storage medium and any data stored on that medium. 
+  Weaknesses are also present when USB ports or other external ports can be used to access the device using features intended for configuration or maintenance.
+
+Impact:
+  Insufficient physical security could lead to compromise of the device itself and any data stored on that device.
+
+Checking for Poor Physical Security includes:
+  Reviewing how easily a device can be disassembled and data storage mediums accessed or removed
+  Reviewing the use of external ports such as USB to determine if data can be accessed on the device without disassembling the device.
+  Reviewing the number of physical external ports to determine if all are required for proper device function
+  Reviewing the administrative interface to determine if external ports such as USB can be deactivated
+  Reviewing the administrative interface to determine if administrative capabilities can be limited to local access only
+
+Adequate physical security requires:
+  Ensuring data storage medium can not be easily removed.
+  Ensuring stored data is encrypted at rest.
+  Ensuring USB ports or other external ports can not be used to maliciously access the device.
+  Ensuring device can not be easily disassembled.
+  Ensuring only required external ports such as USB are required for the product to funtion
+  Ensuring the product has the ability to limit administrative capabilities
+
+----------------------------------------
